@@ -8,7 +8,7 @@ import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { sections, listTypes } from "../components/constants";
+import { sections, listTypes } from "../../lib/constants";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
