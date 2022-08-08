@@ -8,7 +8,7 @@ import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { sections, listTypes } from "./constants";
+import { sections, listTypes } from "../components/constants";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
@@ -104,9 +104,9 @@ const Application: NextPage = () => {
                 },
                 body: JSON.stringify(data),
               }).then((response) => {
-                // localStorage.clear();
-                // localStorage.setItem("submitted", "true");
-                // router.push("/success");
+                localStorage.clear();
+                localStorage.setItem("submitted", "true");
+                router.push("/success");
               });
             }
           }
