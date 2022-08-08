@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Box } from "@mui/system";
-import BasicCard from "../components/Card";
-import RadioCard from "../components/RadioCard";
-import BoGCard from "../components/BoGCard";
+import BasicCard from "../../components/Card";
+import RadioCard from "../../components/RadioCard";
+import BoGCard from "../../components/BoGCard";
 import Button from "@mui/material/Button";
 import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
