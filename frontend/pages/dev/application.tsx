@@ -8,7 +8,7 @@ import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { sections, listTypes } from "../../lib/constants";
+import { sections, listTypes } from "../../lib/dev_constants";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
@@ -87,7 +87,6 @@ const Application: NextPage = () => {
               item.type === listTypes.RADIO
             ) {
               document.getElementById(item.id)?.focus();
-              console.log(item.id);
               complete = false;
             }
           });
