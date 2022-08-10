@@ -1,9 +1,12 @@
 import * as React from "react";
-import { Box } from "@mui/system";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
 import BasicCard from "../../components/Card";
 import RadioCard from "../../components/RadioCard";
 import BoGCard from "../../components/BoGCard";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+
 import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -39,6 +42,7 @@ const Application: NextPage = () => {
   }
 
   const [currSection, setCurrSection] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
 
   const buildData = () => {
     const data: any = {};
@@ -86,7 +90,7 @@ const Application: NextPage = () => {
               evt.target[item.id]?.value === "" &&
               item.type === listTypes.RADIO
             ) {
-              document.getElementById(item.id)?.focus();
+              setOpen(true);
               complete = false;
             }
           });
@@ -180,6 +184,15 @@ const Application: NextPage = () => {
           </Button>
         </div>
       </Box>
+      <div>
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={() => setOpen(false)}
+        >
+          <Alert severity="error">Please fill out all required fields</Alert>
+        </Snackbar>
+      </div>
     </main>
   );
 };
