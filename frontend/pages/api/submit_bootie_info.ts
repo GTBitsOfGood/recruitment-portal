@@ -22,12 +22,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data = req.body;
   const pageNumber = await notion.databases.query({
-    database_id: process.env.NOTION_DEV_DB,
+    database_id: process.env.NOTION_BOOTIE_DB,
   });
   const response = await notion.pages.create({
     parent: {
       type: "database_id",
-      database_id: process.env.NOTION_DEV_DB,
+      database_id: process.env.NOTION_BOOTIE_DB,
     },
     properties: {
       id: {
@@ -143,6 +143,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           },
         ],
       },
+      "Other Commitments": {
+        rich_text: [
+          {
+            text: {
+              content: data.otherCommitments,
+            },
+          },
+        ],
+      },
+      Credits: {
+        rich_text: [
+          {
+            text: {
+              content: data.credits,
+            },
+          },
+        ],
+      },
       "hrs/wk": {
         rich_text: [
           {
@@ -191,9 +209,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "1. What motivates you to join Bits of Good? " +
-                  "Feel free to share your past experiences related to social good, " +
-                  "volunteering,  or nonprofits in either high school or college.",
+                  "1. What motivates you to join Bits of Good? Feel free to share your past " +
+                  "experiences related to social good, volunteering, or nonprofits in " +
+                  "either high school or college.",
               },
               annotations: {
                 bold: true,
@@ -319,7 +337,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: "1. Are you familiar with web-dev?",
+                content:
+                  "1. How much experience do you have in programming/web development?",
               },
               annotations: {
                 bold: true,
@@ -361,7 +380,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "2. Would you describe yourself as a Frontend, Backend or Fullstack engineer?",
+                  "2. Describe an experience where you enjoyed working with your team. " +
+                  "What was the team dynamic like and what were you able to accomplish " +
+                  "as a result? [800 chars]",
               },
               annotations: {
                 bold: true,
@@ -404,8 +425,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "3. What is the most technically challenging project that you have worked on? " +
-                  "Be sure to dive deep into the technical aspects of the project.",
+                  "3. Tell us about an involvement you are passionate about. " +
+                  "This can either be something you've done at GT or when you were in " +
+                  "high school. [800 chars]",
               },
               annotations: {
                 bold: true,
@@ -448,7 +470,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "4. If you don’t have a project to talk about, or fear that your particular project in the previous question doesn’t demonstrate your web development capabilities to the best of your ability, please take this simple take-home assessment: https://github.com/GTBitsOfGood/fall2021-dev-takehome. After you have finished, please discuss your home assessment below (max 1200 characters) and include a link to your public repository.",
+                  "4. Describe one aspect of Bits of Good that you would add or " +
+                  "change if you were director. [500 chars]",
               },
               annotations: {
                 bold: true,
@@ -464,50 +487,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content: data.psq4,
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: "",
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      // psq5
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content:
-                  "5. You’ve been assigned a ticket as a part of your first sprint at Bits of Good " +
-                  "and you find yourself blocked. How would you go about unblocking yourself?",
-              },
-              annotations: {
-                bold: true,
-              },
-            },
-          ],
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: data.psq5,
               },
             },
           ],
