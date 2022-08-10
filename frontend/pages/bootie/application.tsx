@@ -107,9 +107,9 @@ const Application: NextPage = () => {
                 },
                 body: JSON.stringify(data),
               }).then((response) => {
-                // localStorage.clear();
-                // localStorage.setItem("submitted", "true");
-                // router.push("/success");
+                localStorage.clear();
+                localStorage.setItem("submitted", "true");
+                router.push("/success");
               });
             }
           }
