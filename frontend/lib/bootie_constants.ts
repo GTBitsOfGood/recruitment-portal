@@ -7,12 +7,13 @@ enum listTypes {
 }
 
 const section0: Array<any> = [
-  { id: "firstName", label: "First Name", required: true },
-  { id: "lastName", label: "Last Name", required: true },
-  { id: "preferredName", label: "Preferred Name", required: false },
-  { id: "gtEmail", label: "GT Email", required: true },
-  { id: "personalEmail", label: "Personal Email", required: false },
+  { key: 1, id: "firstName", label: "First Name", required: true },
+  { key: 2, id: "lastName", label: "Last Name", required: true },
+  { key: 3, id: "preferredName", label: "Preferred Name", required: false },
+  { key: 4, id: "gtEmail", label: "GT Email", required: true },
+  { key: 5, id: "personalEmail", label: "Personal Email", required: false },
   {
+    key: 6,
     id: "preferredPronouns",
     label: "Preferred Pronouns",
     required: true,
@@ -21,6 +22,7 @@ const section0: Array<any> = [
     radioOptions: ["he/him/his", "she/her/hers", "they/them/theirs"],
   },
   {
+    key: 7,
     id: "gender",
     label: "Gender",
     required: true,
@@ -29,6 +31,7 @@ const section0: Array<any> = [
     radioOptions: ["Male", "Female", "Prefer not to say"],
   },
   {
+    key: 8,
     id: "ethnicity",
     label: "Please indicate the race/ethnicity you identify yourself with",
     required: true,
@@ -45,6 +48,7 @@ const section0: Array<any> = [
     ],
   },
   {
+    key: 9,
     id: "degree",
     label: "What is your degree program?",
     required: true,
@@ -52,42 +56,62 @@ const section0: Array<any> = [
     hasOther: false,
     radioOptions: ["Undergraduate", "Masters", "PhD"],
   },
-  { id: "year", label: "What year are you?", required: true, numeric: true },
   {
+    key: 10,
+    id: "year",
+    label: "What year are you?",
+    required: true,
+    numeric: true,
+  },
+  {
+    key: 11,
     id: "major",
     label: "What major are you, or what is your research focus?",
     required: true,
   },
   {
+    key: 12,
     id: "vip",
     label: "Are you part of the VIP for Bits of Good?",
     required: false,
   },
   {
+    key: 13,
     id: "otherCommitments",
     label: "What else are you involved in on- or off-campus?",
     required: true,
   },
   {
+    key: 14,
+    id: "credits",
+    label: "How many credit Hours are you expecting to take this Fall?",
+    required: true,
+  },
+  {
+    key: 15,
     id: "hpw",
     label: "How many hours/week can you commit to Bits of Good?",
     required: true,
     numeric: true,
   },
   {
+    key: 16,
     id: "meetingAvailability",
-    label: "Can you attend meetings on Tuesdays from 6:30 - 8:00 PM?",
+    label:
+      "Can you attend meetings on Tuesdays & Thursdays from 6:30 - 8:00 PM?",
     required: true,
     type: listTypes.RADIO,
     hasOther: false,
     radioOptions: ["Yes", "No"],
   },
   {
+    key: 17,
     id: "otherAvailabilityConcerns",
     label: "Note any other availability concerns here :)",
     required: false,
   },
   {
+    key: 18,
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
@@ -97,5 +121,114 @@ const section0: Array<any> = [
   },
 ];
 
-const sections: Array<Array<any>> = [section0];
+const section1: Array<any> = [
+  {
+    key: 19,
+    id: "gq1",
+    label:
+      "What motivates you to join Bits of Good? Feel free to share your past " +
+      "experiences related to social good, volunteering, or nonprofits in " +
+      "either high school or college. [800 chars]",
+    required: true,
+  },
+  {
+    key: 20,
+    id: "gq2",
+    label:
+      "While you’re in Bits of Good you’ll be working on a team. " +
+      "Talk about a time you had a disagreement while working on a team. " +
+      "How did you come up with a resolution? [800 chars]",
+    required: true,
+  },
+  {
+    key: 21,
+    id: "gq3",
+    label:
+      "If you had all the time and all the resources in the world, " +
+      "what would you do? [800 chars]",
+    required: true,
+  },
+];
+
+const section2: Array<any> = [
+  {
+    key: 22,
+    id: "psq1",
+    label:
+      "How much experience do you have in programming/web development? [500 chars]",
+    required: true,
+  },
+  {
+    key: 23,
+    id: "psq2",
+    label:
+      "Describe an experience where you enjoyed working with your team. " +
+      "What was the team dynamic like and what were you able to accomplish " +
+      "as a result? [800 chars]",
+    required: true,
+    type: listTypes.RADIO,
+    hasOther: false,
+    radioOptions: ["Frontend", "Backend", "Fullstack"],
+  },
+  {
+    key: 24,
+    id: "psq3",
+    label:
+      "Tell us about an involvement you are passionate about. " +
+      "This can either be something you've done at GT or when you were in " +
+      "high school. [800 chars]",
+    required: true,
+  },
+  {
+    key: 25,
+    id: "psq4",
+    label:
+      "Describe one aspect of Bits of Good that you would add or " +
+      "change if you were director. [500 chars]",
+    required: true,
+  },
+];
+
+const section3: Array<any> = [
+  {
+    key: 26,
+    id: "oq1",
+    label:
+      "Link to your resume (we recommend uploading it to google driving and sharing)",
+    required: false,
+  },
+  {
+    key: 27,
+    id: "oq2",
+    label: "Link to your GitHub",
+    required: false,
+  },
+  {
+    key: 28,
+    id: "oq3",
+    label: "Link to your LinkedIn",
+    required: false,
+  },
+  {
+    key: 29,
+    id: "oq4",
+    label: "Link to your Personal site/Portfolio",
+    required: false,
+  },
+  {
+    key: 30,
+    id: "oq5",
+    label: "Any other links?",
+    required: false,
+  },
+  {
+    key: 31,
+    id: "oq6",
+    label:
+      "Anything you'd like to add or note that wasn't conveyed in the application?",
+    required: false,
+  },
+];
+
+const sections: Array<Array<any>> = [section0, section1, section2, section3];
 export { sections, listTypes };
