@@ -108,7 +108,7 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Fall 2021 or earlier)? If so, what position " +
+      "this semester (Spring 2022 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
   },

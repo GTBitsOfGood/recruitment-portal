@@ -115,7 +115,7 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Fall 2021 or earlier)? If so, what position " +
+      "this semester (Spring 2022 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
   },
@@ -166,9 +166,6 @@ const section2: Array<any> = [
       "What was the team dynamic like and what were you able to accomplish " +
       "as a result? [800 chars]",
     required: true,
-    type: listTypes.RADIO,
-    hasOther: false,
-    radioOptions: ["Frontend", "Backend", "Fullstack"],
   },
   {
     key: 24,
