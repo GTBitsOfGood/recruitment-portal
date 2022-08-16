@@ -6,6 +6,8 @@ import RadioCard from "../../components/RadioCard";
 import BoGCard from "../../components/BoGCard";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 
 import styles from "../../styles/Developer.module.css";
 import { NextPage } from "next";
@@ -43,6 +45,7 @@ const Application: NextPage = () => {
 
   const [currSection, setCurrSection] = React.useState(0);
   const [open, setOpen] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
 
   const buildData = () => {
     const data: any = {};
@@ -99,6 +102,7 @@ const Application: NextPage = () => {
               setCurrSection(currSection + 1);
               window.scroll(0, 0);
             } else {
+              setSubmitted(true);
               const data = buildData();
               fetch("/api/submit_dev_info", {
                 method: "POST",
@@ -110,6 +114,7 @@ const Application: NextPage = () => {
                 localStorage.clear();
                 localStorage.setItem("submitted", "true");
                 router.push("/success");
+                setSubmitted(false);
               });
             }
           }
@@ -193,8 +198,36 @@ const Application: NextPage = () => {
           <Alert severity="error">Please fill out all required fields</Alert>
         </Snackbar>
       </div>
+      <Modal
+        open={submitted}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Please wait while we process your application...
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Did you know that it's illegal to own just one guinea pig in
+            Switzerland. &#128022; It's considered animal abuse because they're
+            social beings and get lonely. &#129402;
+          </Typography>
+        </Box>
+      </Modal>
     </main>
   );
 };
 
 export default Application;
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
