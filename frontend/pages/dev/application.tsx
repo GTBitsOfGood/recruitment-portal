@@ -210,7 +210,7 @@ const Application: NextPage = () => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Did you know that it&apos;s illegal to own just one guinea pig in
             Switzerland. &#128022; It&apos;s considered animal abuse because
-            they're social beings and get lonely. &#129402;
+            they&apos;re social beings and get lonely. &#129402;
           </Typography>
         </Box>
       </Modal>
