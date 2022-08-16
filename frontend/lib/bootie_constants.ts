@@ -59,7 +59,7 @@ const section0: Array<any> = [
   {
     key: 10,
     id: "year",
-    label: "What year are you?",
+    label: "What year are you? (Please enter a number Eg. 3)",
     required: true,
     numeric: true,
   },
