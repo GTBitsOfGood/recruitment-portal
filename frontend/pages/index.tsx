@@ -33,9 +33,7 @@ const Home: NextPage = () => {
           Welcome to the <a href="https://bitsofgood.org">bits of good</a>
           &nbsp;Fall &apos;22 EngApps
         </h2>
-
         <p className={styles.code}>I want to be a...</p>
-
         <div className={styles.grid}>
           <a onClick={() => handleNavigate("dev")} className={styles.card}>
             <h2>Developer &rarr;</h2>
@@ -51,6 +49,8 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
+        <br />
+        Note: You may only apply to one of these positions!
       </main>
     </div>
   );
