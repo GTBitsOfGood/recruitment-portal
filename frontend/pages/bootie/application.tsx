@@ -190,11 +190,7 @@ const Application: NextPage = () => {
         </div>
       </Box>
       <div>
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          onClose={() => setOpen(false)}
-        >
+        <Snackbar open={open} onClose={() => setOpen(false)}>
           <Alert severity="error">Please fill out all required fields</Alert>
         </Snackbar>
       </div>
