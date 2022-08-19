@@ -68,7 +68,7 @@ const Dev: NextPage = () => {
             </a>{" "}
             to learn more about <i>booties</i> at Bits of good &#128187;
             <h3>Important dates</h3>
-            General Deadline: 11:59PM, August 30, 2022
+            General Deadline: 11:59 PM, August 30, 2022
             <br />
             Latest Decision Date: September 5, 2022
             <br />
@@ -76,7 +76,7 @@ const Dev: NextPage = () => {
             Note: If you are accepted, we do have a mandatory Launch Party at
             the beginning of each semester. This is a great opportunity to meet
             other club members, get to know your project team and network with
-            nonprofits! The date is <b>September 10, 2022, 6:30-9PM</b>.
+            nonprofits! The date is <b>September 6, 2022 from 6:30-9PM</b>.
             <br />
             <br />
             Please make sure to add{" "}
