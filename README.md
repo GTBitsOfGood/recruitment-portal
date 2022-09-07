@@ -1,5 +1,4 @@
-# eng-recruitment
-Recruitment system
+# recruitment-portal
 
 Steps to run the repo:
 1. Clone the repo
