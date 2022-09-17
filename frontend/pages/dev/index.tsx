@@ -64,7 +64,7 @@ const Dev: NextPage = () => {
             >
               Click here
             </a>{" "}
-            to learn more about developers at Bits of good &#128187;
+            to learn more about developers at Bits of Good &#128187;
             <h3>Important dates</h3>
             Deadline: 11:59 PM, August 30, 2022
             <br />
