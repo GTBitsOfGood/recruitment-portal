@@ -8,9 +8,6 @@ import { useRouter } from "next/router";
 
 
 const Dev: NextPage = () => {
-  // let questions = getStaticProps();
-  // console.log(questions);
-
   const router = useRouter();
   if (
     typeof window !== "undefined" &&
