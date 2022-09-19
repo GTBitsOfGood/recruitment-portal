@@ -5,8 +5,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styles from "../../styles/Developer.module.css";
 import { useRouter } from "next/router";
+// import getStaticProps from '../../lib/dev_constants'
+
 
 const Dev: NextPage = () => {
+  // let questions = getStaticProps();
+  // console.log(questions);
+
   const router = useRouter();
   if (
     typeof window !== "undefined" &&
