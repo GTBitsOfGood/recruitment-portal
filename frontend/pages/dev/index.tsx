@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import styles from "../../styles/Developer.module.css";
 import { useRouter } from "next/router";
 
-
 const Dev: NextPage = () => {
   const router = useRouter();
   if (
