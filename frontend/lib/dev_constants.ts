@@ -1,3 +1,23 @@
+import { createClient } from "contentful";
+
+export default async function getStaticProps() {
+  // connect to the contentful space
+  const client = createClient({
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY!,
+    space: process.env.CONTENTFUL_SPACE_ID!,
+  });
+
+  const res = await client.getEntries({
+    content_type: "developerRecruitmentQuestions",
+  });
+
+  return {
+    props: {
+      questions: res.items,
+    },
+  };
+}
+
 enum listTypes {
   REGULAR,
   LONGTEXT,
@@ -7,11 +27,36 @@ enum listTypes {
 }
 
 const section0: Array<any> = [
-  { key: 0, id: "firstName", label: "First Name", required: true },
-  { key: 1, id: "lastName", label: "Last Name", required: true },
-  { key: 2, id: "preferredName", label: "Preferred Name", required: false },
-  { key: 3, id: "gtEmail", label: "GT Email", required: true },
-  { key: 4, id: "personalEmail", label: "Personal Email", required: false },
+  {
+    key: 0,
+    id: "firstName",
+    label: "First Name",
+    required: true,
+  },
+  {
+    key: 1,
+    id: "lastName",
+    label: "Last Name",
+    required: true,
+  },
+  {
+    key: 2,
+    id: "preferredName",
+    label: "Preferred Name",
+    required: false,
+  },
+  {
+    key: 3,
+    id: "gtEmail",
+    label: "GT Email",
+    required: true,
+  },
+  {
+    key: 4,
+    id: "personalEmail",
+    label: "Personal Email",
+    required: false,
+  },
   {
     key: 5,
     id: "preferredPronouns",
