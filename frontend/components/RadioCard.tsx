@@ -8,6 +8,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { FormHelperText } from "@mui/material";
 
 interface AppProps {
   id: string;
@@ -62,6 +63,9 @@ export default function RadioCard({
             onFocus={() => {
               setError(val === "");
             }}
+            onClick={() => {
+              setError(!val);
+            }}
           >
             {radioOptions.map((option) => (
               <FormControlLabel
@@ -84,6 +88,16 @@ export default function RadioCard({
                             />
                         </div>} */}
           </RadioGroup>
+          {error && <div style={{display:"inline-flex"}}>
+            <ErrorOutlineIcon color="error"/>
+            &nbsp;&nbsp;
+            <FormHelperText
+              error={true}
+              style={{marginLeft:"0px"}}
+            >
+              This is a required question
+            </FormHelperText>
+          </div>}
         </FormControl>
       </CardContent>
     </Card>
