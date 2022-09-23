@@ -10,6 +10,8 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { FormHelperText } from "@mui/material";
 
+import styles from "../styles/Developer.module.css";
+
 interface AppProps {
   id: string;
   label: string;
@@ -88,12 +90,12 @@ export default function RadioCard({
                             />
                         </div>} */}
           </RadioGroup>
-          {error && <div style={{display:"inline-flex"}}>
+          {error && <div className={styles.radioButtonError}>
             <ErrorOutlineIcon color="error"/>
             &nbsp;&nbsp;
             <FormHelperText
               error={true}
-              style={{marginLeft:"0px"}}
+              className={styles.radioButtonErrorText}
             >
               This is a required question
             </FormHelperText>
