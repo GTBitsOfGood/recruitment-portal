@@ -1,23 +1,3 @@
-import { createClient } from "contentful";
-
-export default async function getStaticProps() {
-  // connect to the contentful space
-  const client = createClient({
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY!,
-    space: process.env.CONTENTFUL_SPACE_ID!,
-  });
-
-  const res = await client.getEntries({
-    content_type: "developerRecruitmentQuestions",
-  });
-
-  return {
-    props: {
-      questions: res.items,
-    },
-  };
-}
-
 enum listTypes {
   REGULAR,
   LONGTEXT,
