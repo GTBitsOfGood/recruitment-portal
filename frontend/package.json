@@ -20,6 +20,7 @@
     "axios": "^0.27.2",
     "contentful": "^9.2.4",
     "contentful-management": "^10.15.1",
+    "dotenv": "^16.0.3",
     "eslint-plugin-react": "^7.28.0",
     "mui-validate": "^0.2.2",
     "next": "12.2.2",

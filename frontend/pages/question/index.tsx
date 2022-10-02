@@ -27,98 +27,10 @@ let questions;
 //         },
 //     };
 // }
-
-// export async function getStaticProps(context) {
-//     const localClient = contentful.createClient({
-//         accessToken: process.env.PERSONAL_ACCESS_TOKEN!
-//     })
-
-//     let returnData;
-
-//     localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-//         .then((space) => {
-//             space.getEnvironment('master')
-//                 .then((environment) => {
-//                     environment.createEntry('developerRecruitmentQuestions', {
-//                         'fields': {
-//                             question: { 'en-US': 'Last Name' },
-//                             key: { 'en-US': 1 },
-//                             required: { 'en-US': true },
-//                         }
-//                     }).then(entry => {
-//                         returnData = entry;
-//                         console.log("Entry created successfully");
-//                     })
-
-//                     // environment.getEntries({
-//                     //     'content_type': 'developerRecruitmentQuestions'
-//                     // })
-//                     //     .then((entries) => {
-//                     //         // data = entries.items[0].fields                            
-//                     //         console.log(entries.items[0].fields);
-//                     //     })
-//                 })
-//         })
-
-
-//     return {
-//         props: {
-//             // data: data
-//             data: returnData
-//         },
-//     };
-// }
+// let localClient: any;
 
 export async function getStaticProps(context) {
-    console.log(context);
-
-    return {
-        props: {
-            data: []
-        }
-    }
-
-}
-
-
-export async function saveData(data: any) {
-    const localClient = contentful.createClient({
-        accessToken: process.env.PERSONAL_ACCESS_TOKEN!
-    })
-
-    localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-        .then((space) => {
-            space.getEnvironment('master')
-                .then((environment) => {
-                    environment.createEntry('developerRecruitmentQuestions', {
-                        'fields': {
-                            question: { 'en-US': 'Last Name' },
-                            key: { 'en-US': 1 },
-                            required: { 'en-US': true },
-                        }
-                    }).then(entry => {
-                        console.log("Entry created successfully");
-                    })
-
-                    // environment.getEntries({
-                    //     'content_type': 'developerRecruitmentQuestions'
-                    // })
-                    //     .then((entries) => {
-                    //         // data = entries.items[0].fields                            
-                    //         console.log(entries.items[0].fields);
-                    //     })
-                })
-        })
-}
-
-const Question = () => {
-    // const data = questions[0]["fields"];
-    // console.log(data);
-    // console.log(questions);
-
-
-
-    // const localClient = contentful.createClient({
+    // localClient = contentful.createClient({
     //     accessToken: process.env.PERSONAL_ACCESS_TOKEN!
     // })
 
@@ -132,7 +44,10 @@ const Question = () => {
     //                         key: { 'en-US': 1 },
     //                         required: { 'en-US': true },
     //                     }
-    //                 }).then(entry => console.log("Entry created successfully"))
+    //                 }).then(entry => {
+    //                     returnData = entry;
+    //                     console.log("Entry created successfully");
+    //                 })
 
     //                 // environment.getEntries({
     //                 //     'content_type': 'developerRecruitmentQuestions'
@@ -144,19 +59,51 @@ const Question = () => {
     //             })
     //     })
 
+
+    return {
+        props: {
+            client: []
+        },
+    };
+}
+
+
+// export async function saveData(data: any) {
+//     const localClient = contentful.createClient({
+//         accessToken: process.env.PERSONAL_ACCESS_TOKEN!
+//     })
+
+//     localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!)
+//         .then((space) => {
+//             space.getEnvironment('master')
+//                 .then((environment) => {
+//                     environment.createEntry('developerRecruitmentQuestions', {
+//                         'fields': {
+//                             question: { 'en-US': 'Last Name' },
+//                             key: { 'en-US': 1 },
+//                             required: { 'en-US': true },
+//                         }
+//                     }).then(entry => {
+//                         console.log("Entry created successfully");
+//                     })
+
+//                     // environment.getEntries({
+//                     //     'content_type': 'developerRecruitmentQuestions'
+//                     // })
+//                     //     .then((entries) => {
+//                     //         // data = entries.items[0].fields                            
+//                     //         console.log(entries.items[0].fields);
+//                     //     })
+//                 })
+//         })
+// }
+
+const Question = () => {
     const [question, setQuestion] = useState("");
     const [type, setType] = useState("");
     const [wordLimit, setWordLimit] = useState(0);
     const [required, setRequired] = useState(false);
     const [radioOptions, setRadioOptions] = useState([]);
-
-    saveData({
-        question,
-        type,
-        wordLimit,
-        required,
-        radioOptions,
-    });
 
     const router = useRouter();
     if (
@@ -176,9 +123,42 @@ const Question = () => {
         }
     }
 
+    async function saveData(data: any) {
+        const localClient = contentful.createClient({
+            accessToken: "CFPAT--J4DoFKGFT_1M7kFCDiB30wVpzkPYQu8cv6uI6Rtwlo"
+        })
+
+        const space = await localClient.getSpace('odv2pefe6lpx');
+        const environment = await space.getEnvironment("master");
+        const entries = await environment.getEntries({
+            content_type: "developerRecruitmentQuestions",
+        });
+        const length = entries.items.length;
+
+        const response = await environment.createEntry(
+            "developerRecruitmentQuestions",
+            {
+                fields: {
+                    question: { "en-US": data.question },
+                    key: { "en-US": length },
+                    required: { "en-US": data.required },
+                    wordLimit: { "en-US": data.wordLimit },
+                    radioOptions: { "en-US": data.radioOptions },
+                },
+            }
+        );
+    }
+
+
     return (
         <div>
-            <form>
+            <form onSubmit={(e: any) => {
+                e.preventDefault();
+                const data = { question, type, wordLimit, required, radioOptions }
+                console.log(data);
+                saveData(data);
+            }
+            }>
                 <label htmlFor="questionTitle">Question Title</label>
                 <br />
                 <input type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
@@ -203,7 +183,7 @@ const Question = () => {
                         <br />
                         <label htmlFor="wordLimit">What is the word limit?</label>
                         <br />
-                        <input type="number" id="wordLimit" />
+                        <input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
                     </>
                 }
 
