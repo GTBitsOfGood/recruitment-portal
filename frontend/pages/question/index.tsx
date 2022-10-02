@@ -125,10 +125,10 @@ const Question = () => {
 
     async function saveData(data: any) {
         const localClient = contentful.createClient({
-            accessToken: "CFPAT--J4DoFKGFT_1M7kFCDiB30wVpzkPYQu8cv6uI6Rtwlo"
+            accessToken: process.env.PERSONAL_ACCESS_TOKEN!
         })
 
-        const space = await localClient.getSpace('odv2pefe6lpx');
+        const space = await localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!);
         const environment = await space.getEnvironment("master");
         const entries = await environment.getEntries({
             content_type: "developerRecruitmentQuestions",
@@ -148,7 +148,6 @@ const Question = () => {
             }
         );
     }
-
 
     return (
         <div>
