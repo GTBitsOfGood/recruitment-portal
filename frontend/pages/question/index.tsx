@@ -1,109 +1,14 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
-import 'axios'
-import { createClient } from "contentful";
 import * as contentful from 'contentful-management';
 import { useState } from "react";
-
-let questions;
-
-// export async function getStaticProps(context) {
-//     // connect to the contentful space
-//     const client = createClient({
-//         accessToken: process.env.CONTENTFUL_ACCESS_KEY!,
-//         space: process.env.CONTENTFUL_SPACE_ID!,
-//     });
-
-//     const res = await client.getEntries({
-//         content_type: "developerRecruitmentQuestions",
-//     });
-
-
-//     questions = res.items;
-
-//     return {
-//         props: {
-//             questions: res.items,
-//         },
-//     };
-// }
-// let localClient: any;
-
-export async function getStaticProps(context) {
-    // localClient = contentful.createClient({
-    //     accessToken: process.env.PERSONAL_ACCESS_TOKEN!
-    // })
-
-    // localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-    //     .then((space) => {
-    //         space.getEnvironment('master')
-    //             .then((environment) => {
-    //                 environment.createEntry('developerRecruitmentQuestions', {
-    //                     'fields': {
-    //                         question: { 'en-US': 'Last Name' },
-    //                         key: { 'en-US': 1 },
-    //                         required: { 'en-US': true },
-    //                     }
-    //                 }).then(entry => {
-    //                     returnData = entry;
-    //                     console.log("Entry created successfully");
-    //                 })
-
-    //                 // environment.getEntries({
-    //                 //     'content_type': 'developerRecruitmentQuestions'
-    //                 // })
-    //                 //     .then((entries) => {
-    //                 //         // data = entries.items[0].fields                            
-    //                 //         console.log(entries.items[0].fields);
-    //                 //     })
-    //             })
-    //     })
-
-
-    return {
-        props: {
-            client: []
-        },
-    };
-}
-
-
-// export async function saveData(data: any) {
-//     const localClient = contentful.createClient({
-//         accessToken: process.env.PERSONAL_ACCESS_TOKEN!
-//     })
-
-//     localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-//         .then((space) => {
-//             space.getEnvironment('master')
-//                 .then((environment) => {
-//                     environment.createEntry('developerRecruitmentQuestions', {
-//                         'fields': {
-//                             question: { 'en-US': 'Last Name' },
-//                             key: { 'en-US': 1 },
-//                             required: { 'en-US': true },
-//                         }
-//                     }).then(entry => {
-//                         console.log("Entry created successfully");
-//                     })
-
-//                     // environment.getEntries({
-//                     //     'content_type': 'developerRecruitmentQuestions'
-//                     // })
-//                     //     .then((entries) => {
-//                     //         // data = entries.items[0].fields                            
-//                     //         console.log(entries.items[0].fields);
-//                     //     })
-//                 })
-//         })
-// }
 
 const Question = () => {
     const [question, setQuestion] = useState("");
     const [type, setType] = useState("");
     const [wordLimit, setWordLimit] = useState(0);
     const [required, setRequired] = useState(false);
-    const [radioOptions, setRadioOptions] = useState([]);
+    const [radioOptions, setRadioOptions] = useState([""]);
+    const [newRadio, setNewRadio] = useState("");
 
     const router = useRouter();
     if (
@@ -174,9 +79,28 @@ const Question = () => {
 
                 {type === "radio" &&
                     <>
-                        {/* <button onClick={e => setRadioOptions}>Add radio options</button> */}
+                        <br />
+                        <label htmlFor="addRadio">Add radio options</label>
+                        <br />
+                        <input type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            setRadioOptions([...radioOptions, newRadio]);
+                        }
+                        }>Add radio option</button>
+
                     </>
                 }
+                {
+                    radioOptions.length > 0 &&
+                    <ul>
+                        {
+                            radioOptions.map((option) => <li>{option}</li>)
+                        }
+                    </ul>
+                }
+
+
                 {type === "text" &&
                     <>
                         <br />
@@ -185,8 +109,6 @@ const Question = () => {
                         <input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
                     </>
                 }
-
-                {/* Dynamically create content based on what was selected above */}
 
                 <br />
                 <label htmlFor="required">Is it required?</label>
