@@ -18,7 +18,6 @@
     "@notionhq/client": "^2.1.1",
     "add": "^2.0.6",
     "axios": "^0.27.2",
-    "contentful": "^9.2.4",
     "contentful-management": "^10.15.1",
     "dotenv": "^16.0.3",
     "eslint-plugin-react": "^7.28.0",

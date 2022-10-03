@@ -18,16 +18,6 @@ const Question = () => {
         router.replace("/success");
     }
 
-    const stringToBoolean = (str: String) => {
-        if (str === "true") {
-            return true;
-        } else if (str == "false") {
-            return false;
-        } else {
-            return false;
-        }
-    }
-
     async function saveData(data: any) {
         const localClient = contentful.createClient({
             accessToken: process.env.PERSONAL_ACCESS_TOKEN!
@@ -113,7 +103,11 @@ const Question = () => {
                 <br />
                 <label htmlFor="required">Is it required?</label>
                 <br />
-                <select name="required" id="required" required onChange={e => setRequired(stringToBoolean(e.target.value))}>
+                <select name="required" id="required" required onChange={e => {
+                    const isTrueSet = e.target.value === 'true' ? true : false;
+                    setRequired(isTrueSet);
+                }
+                }>
                     <option disabled selected> -- select an option -- </option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
