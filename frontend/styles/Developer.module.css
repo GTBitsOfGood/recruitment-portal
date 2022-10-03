@@ -66,3 +66,11 @@
     display: none;
   }
 }
+
+.radioButtonError {
+  display: inline-flex;
+}
+
+.radioButtonErrorText {
+  margin-left: 0px;
+}

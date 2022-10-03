@@ -77,6 +77,7 @@
 .card:active {
   color: #f2594b;
   border-color: #f2594b;
+  cursor: pointer;
 }
 
 .card h2 {
