@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import * as contentful from 'contentful-management';
 import { useState } from "react";
 
-const CreateQuestions = () => {
+const CreateQuestion = () => {
     const [question, setQuestion] = useState("");
     const [type, setType] = useState("");
     const [wordLimit, setWordLimit] = useState(0);
@@ -120,4 +120,4 @@ const CreateQuestions = () => {
     );
 };
 
-export default CreateQuestions;
+export default CreateQuestion;
