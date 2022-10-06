@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import * as contentful from 'contentful-management';
 import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const CreateQuestion = () => {
     const [question, setQuestion] = useState("");
@@ -45,78 +48,79 @@ const CreateQuestion = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={(e: any) => {
-                e.preventDefault();
-                const data = { question, type, wordLimit, required, radioOptions }
-                saveData(data);
-            }
-            }>
-                <label htmlFor="questionTitle">Question Title</label>
-                <br />
-                <input type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
+        <Box component="form" onSubmit={(e: any) => {
+            e.preventDefault();
+            const data = { question, type, wordLimit, required, radioOptions }
+            saveData(data);
+        }}>
 
-                <br />
+            <label htmlFor="questionTitle">Question Title</label>
+            <br />
+            <input type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
 
-                <label htmlFor="types">Response type</label>
-                <br />
-                <select name="types" id="types" required onChange={e => setType(e.target.value)}>
-                    <option disabled selected> -- select an option -- </option>
-                    <option value="radio">Radio</option>
-                    <option value="text">Text</option>
-                </select>
+            <br />
 
-                {type === "radio" &&
-                    <>
-                        <br />
-                        <label htmlFor="addRadio">Add radio options</label>
-                        <br />
-                        <input type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
-                        <button onClick={(e) => {
-                            e.preventDefault();
+            <label htmlFor="types">Response type</label>
+            <br />
+            <select name="types" id="types" required onChange={e => setType(e.target.value)}>
+                <option disabled selected> -- select an option -- </option>
+                <option value="radio">Radio</option>
+                <option value="text">Text</option>
+            </select>
+
+            {type === "radio" &&
+                <>
+                    <br />
+                    <label htmlFor="addRadio">Add radio options</label>
+                    <br />
+                    <input type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        if (radioOptions[0] == "") {
+                            setRadioOptions([newRadio]);
+                        } else {
                             setRadioOptions([...radioOptions, newRadio]);
                         }
-                        }>Add radio option</button>
+                    }
+                    }>Add radio option</button>
+                </>
+            }
+            {
+                (radioOptions.length > 0 && radioOptions[0] != "") &&
+                <ul>
+                    {
+                        radioOptions.map((option) => <li key="{option}">{option}</li>)
+                    }
+                </ul>
+            }
 
-                    </>
-                }
-                {
-                    radioOptions.length > 0 &&
-                    <ul>
-                        {
-                            radioOptions.map((option) => <li key="{option}">{option}</li>)
-                        }
-                    </ul>
-                }
 
+            {type === "text" &&
+                <>
+                    <br />
+                    <label htmlFor="wordLimit">What is the word limit?</label>
+                    <br />
+                    <input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
+                </>
+            }
 
-                {type === "text" &&
-                    <>
-                        <br />
-                        <label htmlFor="wordLimit">What is the word limit?</label>
-                        <br />
-                        <input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
-                    </>
-                }
+            <br />
+            <label htmlFor="required">Is it required?</label>
+            <br />
+            <select name="required" id="required" required onChange={e => {
+                const isTrueSet = e.target.value === 'true' ? true : false;
+                setRequired(isTrueSet);
+            }
+            }>
+                <option disabled selected> -- select an option -- </option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
 
-                <br />
-                <label htmlFor="required">Is it required?</label>
-                <br />
-                <select name="required" id="required" required onChange={e => {
-                    const isTrueSet = e.target.value === 'true' ? true : false;
-                    setRequired(isTrueSet);
-                }
-                }>
-                    <option disabled selected> -- select an option -- </option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
+            <br />
 
-                <br />
-
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
+            <input type="submit" value="Submit" />
+        </Box >
     );
 };
 
