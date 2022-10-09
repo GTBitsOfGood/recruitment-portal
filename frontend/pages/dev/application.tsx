@@ -113,7 +113,6 @@ const Application: NextPage = () => {
                 body: JSON.stringify(data),
               }).then((response) => {
                 if (!response.ok) {
-                  localStorage.clear();
                   setSubmitted(false);
                   setSubmitFailed(true);
                 } else {
