@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
 import * as contentful from 'contentful-management';
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Box, Button, Input, InputLabel, List, ListItem, OutlinedInput, Select, Typography, MenuItem } from "@mui/material";
 
 const CreateQuestion = () => {
     const [question, setQuestion] = useState("");
@@ -23,10 +21,10 @@ const CreateQuestion = () => {
 
     async function saveData(data: any) {
         const localClient = contentful.createClient({
-            accessToken: process.env.PERSONAL_ACCESS_TOKEN!
+            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
         })
 
-        const space = await localClient.getSpace(process.env.CONTENTFUL_SPACE_ID!);
+        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
         const environment = await space.getEnvironment("master");
         const entries = await environment.getEntries({
             content_type: "developerRecruitmentQuestions",
@@ -54,27 +52,20 @@ const CreateQuestion = () => {
             saveData(data);
         }}>
 
-            <label htmlFor="questionTitle">Question Title</label>
-            <br />
-            <input type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
+            <InputLabel htmlFor="questionTitle">Question Title</InputLabel>
+            <OutlinedInput type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
 
-            <br />
-
-            <label htmlFor="types">Response type</label>
-            <br />
-            <select name="types" id="types" required onChange={e => setType(e.target.value)}>
-                <option disabled selected> -- select an option -- </option>
-                <option value="radio">Radio</option>
-                <option value="text">Text</option>
-            </select>
+            <InputLabel htmlFor="types">Response type</InputLabel>
+            <Select name="types" id="types" required onChange={e => setType(e.target.value)}>
+                <MenuItem value="radio">Radio</MenuItem>
+                <MenuItem value="text">Text</MenuItem>
+            </Select>
 
             {type === "radio" &&
                 <>
-                    <br />
-                    <label htmlFor="addRadio">Add radio options</label>
-                    <br />
-                    <input type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
-                    <button onClick={(e) => {
+                    <InputLabel htmlFor="addRadio">Add radio options</InputLabel>
+                    <OutlinedInput type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
+                    <Button onClick={(e) => {
                         e.preventDefault();
                         if (radioOptions[0] == "") {
                             setRadioOptions([newRadio]);
@@ -82,44 +73,38 @@ const CreateQuestion = () => {
                             setRadioOptions([...radioOptions, newRadio]);
                         }
                     }
-                    }>Add radio option</button>
+                    }>Add radio option</Button>
                 </>
             }
             {
                 (radioOptions.length > 0 && radioOptions[0] != "") &&
-                <ul>
+                <List>
                     {
-                        radioOptions.map((option) => <li key="{option}">{option}</li>)
+                        radioOptions.map((option) => <ListItem key="{option}" style={{ display: "list-item" }}>{option}</ListItem>)
                     }
-                </ul>
+                </List>
             }
 
 
             {type === "text" &&
                 <>
-                    <br />
-                    <label htmlFor="wordLimit">What is the word limit?</label>
-                    <br />
-                    <input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
+                    <InputLabel htmlFor="wordLimit">What is the word limit?</InputLabel>
+                    <Input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
                 </>
             }
 
-            <br />
-            <label htmlFor="required">Is it required?</label>
-            <br />
-            <select name="required" id="required" required onChange={e => {
-                const isTrueSet = e.target.value === 'true' ? true : false;
+            <InputLabel htmlFor="required">Is it required?</InputLabel>
+            <Select label="required" labelId="required-label" required onChange={e => {
+                const isTrueSet: boolean = e.target.value === 'true' ? true : false;
                 setRequired(isTrueSet);
             }
             }>
-                <option disabled selected> -- select an option -- </option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
-
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
+            </Select>
             <br />
 
-            <input type="submit" value="Submit" />
+            <Button type="submit">Submit</Button>
         </Box >
     );
 };
