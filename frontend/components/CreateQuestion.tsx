@@ -1,15 +1,23 @@
 import { useRouter } from "next/router";
 import * as contentful from 'contentful-management';
 import { useState } from "react";
-import { Box, Button, Input, InputLabel, List, ListItem, OutlinedInput, Select, Typography, MenuItem } from "@mui/material";
+import { Box, Button, Input, InputLabel, List, ListItem, OutlinedInput, Select, Typography, MenuItem, Card } from "@mui/material";
 
-const CreateQuestion = () => {
+const CreateQuestion = ({ toSetQuestionNumber, questionNumberIn, questionIn, typeIn, wordLimitIn, radioOptionsIn, requiredIn }) => {
+    const [questionNumber, setQuestionNumber] = useState(0);
     const [question, setQuestion] = useState("");
     const [type, setType] = useState("");
-    const [wordLimit, setWordLimit] = useState(0);
+    const [wordLimit, setWordLimit] = useState(100);
+    const [key, setKey] = useState(0);
     const [required, setRequired] = useState(false);
-    const [radioOptions, setRadioOptions] = useState([""]);
+    const [radioOptions, setRadioOptions] = useState<String[]>([]);
     const [newRadio, setNewRadio] = useState("");
+
+    setQuestionNumber(questionNumberIn);
+    setQuestion(questionIn);
+    setType(typeIn);
+    setWordLimit(wordLimitIn);
+    setRequired(requiredIn);
 
     const router = useRouter();
     if (
@@ -21,15 +29,19 @@ const CreateQuestion = () => {
 
     async function saveData(data: any) {
         const localClient = contentful.createClient({
-            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
+            accessToken: 
         })
 
-        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
+        // process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
+        // process.env.REACT_APP_CONTENTFUL_SPACE_ID!
+
+        const space = await localClient.getSpace();
         const environment = await space.getEnvironment("master");
         const entries = await environment.getEntries({
             content_type: "developerRecruitmentQuestions",
         });
         const length = entries.items.length;
+        setKey(length);
 
         const response = await environment.createEntry(
             "developerRecruitmentQuestions",
@@ -43,20 +55,37 @@ const CreateQuestion = () => {
                 },
             }
         );
+
+        if (response) {
+            setQuestion("");
+            setRequired(false);
+            setWordLimit(0);
+            setNewRadio("")
+            setRadioOptions([""])
+        }
     }
 
     return (
-        <Box component="form" onSubmit={(e: any) => {
+        <Card component="form" onSubmit={(e: any) => {
             e.preventDefault();
             const data = { question, type, wordLimit, required, radioOptions }
             saveData(data);
         }}>
 
+            {
+                toSetQuestionNumber &&
+                <>
+                    <InputLabel htmlFor="questionNumber">Question Number</InputLabel>
+                    <OutlinedInput type="number" id="questionTitle" value={questionNumber} required onChange={e => setQuestionNumber(e.target.value)} />
+                </>
+            }
+
+
             <InputLabel htmlFor="questionTitle">Question Title</InputLabel>
-            <OutlinedInput type="text" id="questionTitle" required onChange={e => setQuestion(e.target.value)} />
+            <OutlinedInput type="text" id="questionTitle" value={question} required onChange={e => setQuestion(e.target.value)} />
 
             <InputLabel htmlFor="types">Response type</InputLabel>
-            <Select name="types" id="types" required onChange={e => setType(e.target.value)}>
+            <Select name="types" id="types" value={type} onChange={e => setType(e.target.value)}>
                 <MenuItem value="radio">Radio</MenuItem>
                 <MenuItem value="text">Text</MenuItem>
             </Select>
@@ -64,7 +93,7 @@ const CreateQuestion = () => {
             {type === "radio" &&
                 <>
                     <InputLabel htmlFor="addRadio">Add radio options</InputLabel>
-                    <OutlinedInput type="text" id="addRadio" onChange={e => setNewRadio(e.target.value)} />
+                    <OutlinedInput type="text" value={newRadio} id="addRadio" onChange={e => setNewRadio(e.target.value)} />
                     <Button onClick={(e) => {
                         e.preventDefault();
                         if (radioOptions[0] == "") {
@@ -80,7 +109,7 @@ const CreateQuestion = () => {
                 (radioOptions.length > 0 && radioOptions[0] != "") &&
                 <List>
                     {
-                        radioOptions.map((option) => <ListItem key="{option}" style={{ display: "list-item" }}>{option}</ListItem>)
+                        radioOptions.map((option) => <ListItem key="{option}" style={{ display: "list-item" }}>• {option}</ListItem>)
                     }
                 </List>
             }
@@ -89,12 +118,12 @@ const CreateQuestion = () => {
             {type === "text" &&
                 <>
                     <InputLabel htmlFor="wordLimit">What is the word limit?</InputLabel>
-                    <Input type="number" id="wordLimit" onChange={e => setWordLimit(parseInt(e.target.value))} />
+                    <Input type="number" id="wordLimit" value={wordLimit} onChange={e => setWordLimit(parseInt(e.target.value))} />
                 </>
             }
 
             <InputLabel htmlFor="required">Is it required?</InputLabel>
-            <Select label="required" labelId="required-label" required onChange={e => {
+            <Select label="required" value={required} labelId="required-label" required onChange={e => {
                 const isTrueSet: boolean = e.target.value === 'true' ? true : false;
                 setRequired(isTrueSet);
             }
@@ -105,7 +134,7 @@ const CreateQuestion = () => {
             <br />
 
             <Button type="submit">Submit</Button>
-        </Box >
+        </Card >
     );
 };
 
