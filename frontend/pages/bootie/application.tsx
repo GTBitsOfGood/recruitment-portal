@@ -69,7 +69,8 @@ const Application: NextPage = () => {
     const data: any = {};
     sections.forEach((section) => {
       section.forEach((item) => {
-        data[item.id] =
+        data[item.id] = {};
+        data[item.id]["details"] =
           localStorage.getItem(item.id) !== undefined &&
           localStorage.getItem(item.id) !== null
             ? localStorage.getItem(item.id)
@@ -123,7 +124,7 @@ const Application: NextPage = () => {
             } else {
               setSubmitted(true);
               const data = buildData();
-              console.log(data);
+
               fetch("/api/submit_bootie_info", {
                 method: "POST",
                 headers: {

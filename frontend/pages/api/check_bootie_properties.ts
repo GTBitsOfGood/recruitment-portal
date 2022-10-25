@@ -26,6 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     database_id: process.env.NOTION_BOOTIE_DB,
   });
 
+  for (const property in data) {
+    if (!response.properties.hasOwnProperty(data[property].name)) {
+    }
+  }
+
   console.log(response.properties);
 
   // const options = {
