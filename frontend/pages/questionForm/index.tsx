@@ -7,9 +7,6 @@ import QuestionCard from "../../components/QuestionCard";
 const Question = () => {
     return (
         <Box>
-            <CreateQuestion />
-            <Typography>Preview and edit the questions:</Typography>
-
             <QuestionCard></QuestionCard>
         </Box>
     )

@@ -1,15 +1,31 @@
 import { useRouter } from "next/router";
 import * as contentful from 'contentful-management';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Input, InputLabel, List, ListItem, OutlinedInput, Select, Typography, MenuItem, Card } from "@mui/material";
 
-const CreateQuestion = () => {
+const EditQuestion = ({ questionNumberIn, questionIn, typeIn, wordLimitIn, radioOptionsIn, requiredIn, questionId }) => {
+    const [questionNumber, setQuestionNumber] = useState(0);
     const [question, setQuestion] = useState("");
     const [type, setType] = useState("");
     const [wordLimit, setWordLimit] = useState(100);
     const [required, setRequired] = useState(false);
     const [radioOptions, setRadioOptions] = useState<String[]>([]);
     const [newRadio, setNewRadio] = useState("");
+    const [id, setId] = useState("");
+
+    useEffect(() => {
+        setQuestionNumber(questionNumberIn);
+        setQuestion(questionIn);
+        setType(typeIn);
+        if (typeof radioOptionsIn == "undefined") {
+            setRadioOptions([])
+        } else {
+            setRadioOptions(radioOptionsIn);
+        }
+        setWordLimit(wordLimitIn);
+        setRequired(requiredIn);
+        setId(questionId);
+    }, [])
 
     const router = useRouter();
     if (
@@ -32,39 +48,31 @@ const CreateQuestion = () => {
         const entries = await environment.getEntries({
             content_type: "developerRecruitmentQuestions",
         });
-        const length = entries.items.length;
 
-
-        const response = await environment.createEntry(
-            "developerRecruitmentQuestions",
-            {
-                fields: {
-                    question: { "en-US": data.question },
-                    key: { "en-US": length + 1 },
-                    type: { "en-US": data.type },
-                    required: { "en-US": data.required },
-                    wordLimit: { "en-US": data.wordLimit },
-                    radioOptions: { "en-US": data.radioOptions },
-                },
-            }
-        );
-
-        if (response) {
-            setQuestion("");
-            setRequired(false);
-            setWordLimit(0);
-            setNewRadio("");
-            setRadioOptions([""]);
-            setType("");
+        const entry = await environment.getEntry(id);
+        entry.fields.question["en-US"] = data.question
+        entry.fields.type["en-US"] = data.type
+        entry.fields.key["en-US"] = data.questionNumber
+        entry.fields.required["en-US"] = data.required
+        entry.fields.wordLimit["en-US"] = data.wordLimit
+        if (!(radioOptions.length == 0)) {
+            entry.fields.radioOptions = { ["en-US"]: data.radioOptions }
         }
+        const response = await entry.update()
     }
 
     return (
         <Card component="form" onSubmit={(e: any) => {
             e.preventDefault();
-            const data = { question, type, wordLimit, required, radioOptions }
+            const data = { question, type, wordLimit, required, radioOptions, questionNumber }
             saveData(data);
         }}>
+
+            <>
+                <InputLabel htmlFor="questionNumber">Question Number</InputLabel>
+                <OutlinedInput type="number" id="questionTitle" value={questionNumber} required onChange={e => setQuestionNumber(+e.target.value)} />
+            </>
+
             <InputLabel htmlFor="questionTitle">Question Title</InputLabel>
             <OutlinedInput type="text" id="questionTitle" value={question} required onChange={e => setQuestion(e.target.value)} />
 
@@ -85,13 +93,12 @@ const CreateQuestion = () => {
                         } else {
                             setRadioOptions([...radioOptions, newRadio]);
                         }
-                        setNewRadio("");
                     }
                     }>Add radio option</Button>
                 </>
             }
             {
-                (radioOptions.length > 0 && radioOptions[0] != "") &&
+                (type == "radio") &&
                 <List>
                     {
                         radioOptions.map((option) => <ListItem key="{option}" style={{ display: "list-item" }}>• {option}</ListItem>)
@@ -123,4 +130,4 @@ const CreateQuestion = () => {
     );
 };
 
-export default CreateQuestion;
+export default EditQuestion;
