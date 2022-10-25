@@ -48,6 +48,23 @@ const Application: NextPage = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitFailed, setSubmitFailed] = React.useState(false);
 
+  fetch("/api/check_bootie_properties", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error));
+
+  // function checkPropteries(data: any) {
+  //   const db_properties =
+
+  //   for (const property in data) {
+  //     data[property];
+  //   }
+  // }
+
   const buildData = () => {
     const data: any = {};
     sections.forEach((section) => {
@@ -95,7 +112,7 @@ const Application: NextPage = () => {
               item.type === listTypes.RADIO
             ) {
               setOpen(true);
-              document.getElementById(item.id)?.click()
+              document.getElementById(item.id)?.click();
               complete = false;
             }
           });
@@ -106,6 +123,7 @@ const Application: NextPage = () => {
             } else {
               setSubmitted(true);
               const data = buildData();
+              console.log(data);
               fetch("/api/submit_bootie_info", {
                 method: "POST",
                 headers: {
