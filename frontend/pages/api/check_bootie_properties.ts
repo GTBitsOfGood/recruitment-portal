@@ -26,8 +26,78 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     database_id: process.env.NOTION_BOOTIE_DB,
   });
 
+  function updateDatabaseWithNotionID(property: any) {
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: `${process.env.NOTION_SECRET}`,
+        "Notion-Version": "2022-06-28",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        properties: {
+          [property.notion_id]: {
+            rich_text: {},
+          },
+        },
+      }),
+    };
+
+    fetch(
+      `https://api.notion.com/v1/databases/${process.env.NOTION_BOOTIE_DB}`,
+      options
+    )
+      .then((response) => {
+        console.log("Update API Successful!");
+      })
+      .catch((error) => {
+        console.log("Update API Failed!");
+      });
+  }
+
+  function updateDatabaseWithID(property: any) {
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: `${process.env.NOTION_SECRET}`,
+        "Notion-Version": "2022-06-28",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        properties: {
+          [property.id]: {
+            rich_text: {},
+          },
+        },
+      }),
+    };
+
+    fetch(
+      `https://api.notion.com/v1/databases/${process.env.NOTION_BOOTIE_DB}`,
+      options
+    )
+      .then((response) => {
+        console.log("Update API Successful!");
+      })
+      .catch((error) => {
+        console.log("Update API Failed!");
+      });
+  }
+
   for (const property in data) {
-    if (!response.properties.hasOwnProperty(data[property].name)) {
+    if (data.prop.notion_id === "N/A") {
+      updateDatabaseWithID(property);
+    } else {
+      if (!response.properties.hasOwnProperty(.notion_id)) {
+        // account for when the notion_id is N/A
+        updateDatabaseWithNotionID(property);
+
+        const newResponse = await notion.databases.retrieve({
+          database_id: process.env.NOTION_BOOTIE_DB,
+        });
+
+        res.status(200).json(newResponse);
+      }
     }
   }
 
@@ -56,5 +126,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //   .then((response) => console.log(response.properties))
   //   .catch((error) => console.log(error));
 
-  res.status(200).json(response.properties);
+  res.status(200).json(response);
 };

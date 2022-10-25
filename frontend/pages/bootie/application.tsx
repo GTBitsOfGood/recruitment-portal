@@ -19,6 +19,11 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 
+const { Client } = require("@notionhq/client");
+const notion = new Client({
+  auth: process.env.NOTION_SECRET,
+});
+
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   width: "50%",
   height: 10,
@@ -48,15 +53,6 @@ const Application: NextPage = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitFailed, setSubmitFailed] = React.useState(false);
 
-  fetch("/api/check_bootie_properties", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
-
   // function checkPropteries(data: any) {
   //   const db_properties =
 
@@ -64,6 +60,23 @@ const Application: NextPage = () => {
   //     data[property];
   //   }
   // }
+
+  fetch("/api/check_bootie_properties", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "Date Created": {
+        details: "hi",
+        notion_id: "Date Created",
+        id: "dateCreated",
+      },
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((error) => console.log("error"));
 
   const buildData = () => {
     const data: any = {};
@@ -74,6 +87,10 @@ const Application: NextPage = () => {
           localStorage.getItem(item.id) !== undefined &&
           localStorage.getItem(item.id) !== null
             ? localStorage.getItem(item.id)
+            : "N/A";
+        data[item.id]["notion_id"] =
+          item.notion_id !== undefined && item.notion_id !== null
+            ? item.notion_id
             : "N/A";
       });
     });
@@ -124,24 +141,38 @@ const Application: NextPage = () => {
             } else {
               setSubmitted(true);
               const data = buildData();
-
-              fetch("/api/submit_bootie_info", {
-                method: "POST",
+              fetch("/api/check_bootie_properties", {
+                method: "PATCH",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
-              }).then((response) => {
-                if (!response.ok) {
-                  setSubmitted(false);
-                  setSubmitFailed(true);
-                } else {
-                  localStorage.clear();
-                  localStorage.setItem("submitted", "true");
-                  router.push("/success");
-                  setSubmitted(false);
-                }
-              });
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    setSubmitted(false);
+                    setSubmitFailed(true);
+                  } else {
+                    fetch("/api/submit_bootie_info", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(data),
+                    }).then((response) => {
+                      if (!response.ok) {
+                        setSubmitted(false);
+                        setSubmitFailed(true);
+                      } else {
+                        localStorage.clear();
+                        localStorage.setItem("submitted", "true");
+                        router.push("/success");
+                        setSubmitted(false);
+                      }
+                    });
+                  }
+                })
+                .catch((error) => console.log(error));
             }
           }
         }}

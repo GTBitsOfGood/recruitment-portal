@@ -148,6 +148,7 @@ const section0: Array<any> = [
   {
     key: 17,
     id: "otherAvailabilityConcerns",
+    notion_id: "Other Availability Concerns",
     label: "Note any other availability concerns here :)",
     required: false,
   },
