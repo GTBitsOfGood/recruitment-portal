@@ -24,9 +24,6 @@ const CreateQuestion = () => {
             accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
         })
 
-        // 
-        // 
-
         const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
         const environment = await space.getEnvironment("master");
         const entries = await environment.getEntries({

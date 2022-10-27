@@ -25,13 +25,10 @@ const QuestionCard = () => {
 
     async function deleteQuestion(id: string) {
         const localClient = contentful.createClient({
-            accessToken: "CFPAT--J4DoFKGFT_1M7kFCDiB30wVpzkPYQu8cv6uI6Rtwlo"
+            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
         })
 
-        // process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
-        // process.env.REACT_APP_CONTENTFUL_SPACE_ID!
-
-        const space = await localClient.getSpace("odv2pefe6lpx");
+        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
         const environment = await space.getEnvironment("master");
 
         const entry = await environment.getEntry(id)
@@ -41,13 +38,13 @@ const QuestionCard = () => {
     useEffect(() => {
         async function connectDB() {
             const localClient = contentful.createClient({
-                accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
+                accessToken: "CFPAT--J4DoFKGFT_1M7kFCDiB30wVpzkPYQu8cv6uI6Rtwlo"
             })
 
-            // 
-            // 
+            // process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
+            // process.env.REACT_APP_CONTENTFUL_SPACE_ID!
 
-            const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
+            const space = await localClient.getSpace("odv2pefe6lpx");
             const environment = await space.getEnvironment("master");
             const entries = await environment.getEntries({
                 content_type: "developerRecruitmentQuestions",
@@ -60,7 +57,7 @@ const QuestionCard = () => {
 
         connectDB().catch(console.error)
         setReloadCard(false);
-    }, [reloadCard])
+    }, [])
 
     return (
         <>
