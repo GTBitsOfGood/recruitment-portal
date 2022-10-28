@@ -48,6 +48,7 @@ const Application: NextPage = () => {
   const [open, setOpen] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [preview, setPreview] = React.useState(false);
+  const [submitFailed, setSubmitFailed] = React.useState(false);
 
   const buildData = () => {
     const data: any = {};
@@ -187,6 +188,11 @@ const Application: NextPage = () => {
             <Alert severity="error">Please fill out all required fields</Alert>
           </Snackbar>
         </div>
+        <div>
+        <Snackbar open={submitFailed} onClose={() => setSubmitFailed(false)}>
+          <Alert severity="error">Application failed to submit</Alert>
+        </Snackbar>
+        </div>
         <Modal
           open={submitted}
           aria-labelledby="modal-modal-title"
@@ -244,10 +250,15 @@ const Application: NextPage = () => {
             },
             body: JSON.stringify(data),
           }).then((response) => {
-            localStorage.clear();
-            localStorage.setItem("submitted", "true");
-            router.push("/success");
-            setSubmitted(false);
+            if (!response.ok) {
+              setSubmitted(false);
+              setSubmitFailed(true);
+            } else {
+              localStorage.clear();
+              localStorage.setItem("submitted", "true");
+              router.push("/success");
+              setSubmitted(false);
+            }
           });
         }}>Submit</Button>
       </div>}
