@@ -53,14 +53,6 @@ const Application: NextPage = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitFailed, setSubmitFailed] = React.useState(false);
 
-  // function checkPropteries(data: any) {
-  //   const db_properties =
-
-  //   for (const property in data) {
-  //     data[property];
-  //   }
-  // }
-
   fetch("/api/check_bootie_properties", {
     method: "PATCH",
     headers: {
