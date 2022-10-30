@@ -7,14 +7,45 @@ enum listTypes {
 }
 
 const section0: Array<any> = [
-  { key: 1, id: "firstName", label: "First Name", required: true },
-  { key: 2, id: "lastName", label: "Last Name", required: true },
-  { key: 3, id: "preferredName", label: "Preferred Name", required: false },
-  { key: 4, id: "gtEmail", label: "GT Email", required: true },
-  { key: 5, id: "personalEmail", label: "Personal Email", required: false },
+  {
+    key: 1,
+    id: "firstName",
+    notion_id: "First Name",
+    label: "First Name",
+    required: true,
+  },
+  {
+    key: 2,
+    id: "lastName",
+    notion_id: "Last Name",
+    label: "Last Name",
+    required: true,
+  },
+  {
+    key: 3,
+    id: "preferredName",
+    notion_id: "Preferred Name",
+    label: "Preferred Name",
+    required: false,
+  },
+  {
+    key: 4,
+    id: "gtEmail",
+    notion_id: "GT Email",
+    label: "GT Email",
+    required: true,
+  },
+  {
+    key: 5,
+    id: "personalEmail",
+    notion_id: "Personal Email",
+    label: "Personal Email",
+    required: false,
+  },
   {
     key: 6,
     id: "preferredPronouns",
+    notion_id: "Pronouns",
     label: "Preferred Pronouns",
     required: true,
     type: listTypes.RADIO,
@@ -24,6 +55,7 @@ const section0: Array<any> = [
   {
     key: 7,
     id: "gender",
+    notion_id: "Gender",
     label: "Gender",
     required: true,
     type: listTypes.RADIO,
@@ -33,6 +65,7 @@ const section0: Array<any> = [
   {
     key: 8,
     id: "ethnicity",
+    notion_id: "Ethnicity",
     label: "Please indicate the race/ethnicity you identify yourself with",
     required: true,
     type: listTypes.RADIO,
@@ -50,6 +83,7 @@ const section0: Array<any> = [
   {
     key: 9,
     id: "degree",
+    notion_id: "Degree",
     label: "What is your degree program?",
     required: true,
     type: listTypes.RADIO,
@@ -59,6 +93,7 @@ const section0: Array<any> = [
   {
     key: 10,
     id: "year",
+    notion_id: "Year",
     label: "What year are you? (Please enter a number Eg. 3)",
     required: true,
     numeric: true,
@@ -66,30 +101,35 @@ const section0: Array<any> = [
   {
     key: 11,
     id: "major",
+    notion_id: "Major",
     label: "What major are you, or what is your research focus?",
     required: true,
   },
   {
     key: 12,
     id: "vip",
+    notion_id: "VIP",
     label: "Are you part of the VIP for Bits of Good?",
     required: false,
   },
   {
     key: 13,
     id: "otherCommitments",
+    notion_id: "Other Commitments",
     label: "What else are you involved in on- or off-campus?",
     required: true,
   },
   {
     key: 14,
     id: "credits",
+    notion_id: "Credits",
     label: "How many credit Hours are you expecting to take this Fall?",
     required: true,
   },
   {
     key: 15,
     id: "hpw",
+    notion_id: "hrs/wk",
     label: "How many hours/week can you commit to Bits of Good?",
     required: true,
     numeric: true,
@@ -97,6 +137,7 @@ const section0: Array<any> = [
   {
     key: 16,
     id: "meetingAvailability",
+    notion_id: "Meeting Availability",
     label:
       "Can you attend meetings on Tuesdays & Thursdays from 6:30 - 8:00 PM?",
     required: true,
@@ -107,12 +148,14 @@ const section0: Array<any> = [
   {
     key: 17,
     id: "otherAvailabilityConcerns",
+    notion_id: "Other Availability Concerns",
     label: "Note any other availability concerns here :)",
     required: false,
   },
   {
     key: 18,
     id: "previouslyApplied",
+    notion_id: "Previously Applied",
     label:
       "Were you previously a member of Bits of Good prior to " +
       "this semester (Spring 2022 or earlier)? If so, what position " +

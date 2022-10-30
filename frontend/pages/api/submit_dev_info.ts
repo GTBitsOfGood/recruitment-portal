@@ -45,7 +45,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.firstName,
+              content: data.firstName.details,
             },
           },
         ],
@@ -54,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.lastName,
+              content: data.lastName.details,
             },
           },
         ],
@@ -63,7 +63,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.preferredName,
+              content: data.preferredName.details,
             },
           },
         ],
@@ -72,7 +72,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.gtEmail,
+              content: data.gtEmail.details,
             },
           },
         ],
@@ -81,7 +81,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.personalEmail,
+              content: data.personalEmail.details,
             },
           },
         ],
@@ -90,7 +90,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.preferredPronouns,
+              content: data.preferredPronouns.details,
             },
           },
         ],
@@ -99,7 +99,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.gender,
+              content: data.gender.details,
             },
           },
         ],
@@ -108,7 +108,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.ethnicity,
+              content: data.ethnicity.details,
             },
           },
         ],
@@ -117,19 +117,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.degree,
+              content: data.degree.details,
             },
           },
         ],
       },
       Year: {
-        number: parseInt(data.year, 10),
+        number: parseInt(data.year.details, 10),
       },
       Major: {
         rich_text: [
           {
             text: {
-              content: data.major,
+              content: data.major.details,
             },
           },
         ],
@@ -138,7 +138,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.vip,
+              content: data.vip.details,
             },
           },
         ],
@@ -147,7 +147,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.hpw,
+              content: data.hpw.details,
             },
           },
         ],
@@ -156,7 +156,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.meetingAvailability,
+              content: data.meetingAvailability.details,
             },
           },
         ],
@@ -165,7 +165,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rich_text: [
           {
             text: {
-              content: data.previouslyApplied,
+              content: data.previouslyApplied.details,
             },
           },
         ],
@@ -208,7 +208,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.gq1,
+                content: data.gq1.details,
               },
             },
           ],
@@ -252,7 +252,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.gq2,
+                content: data.gq2.details,
               },
             },
           ],
@@ -294,7 +294,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.gq3,
+                content: data.gq3.details,
               },
             },
           ],
@@ -334,7 +334,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq1,
+                content: data.psq1.details,
               },
             },
           ],
@@ -376,7 +376,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq2,
+                content: data.psq2.details,
               },
             },
           ],
@@ -420,7 +420,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq3,
+                content: data.psq3.details,
               },
             },
           ],
@@ -463,7 +463,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq4,
+                content: data.psq4.details,
               },
             },
           ],
@@ -507,7 +507,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq5,
+                content: data.psq5.details,
               },
             },
           ],
@@ -555,10 +555,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
             {
               text: {
-                content: data.oq1,
-                ...(isValidUrl(data.oq1) && {
+                content: data.oq1.details,
+                ...(isValidUrl(data.oq1.details) && {
                   link: {
-                    url: data.oq1,
+                    url: data.oq1.details,
                   },
                 }),
               },
@@ -581,10 +581,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
             {
               text: {
-                content: data.oq2,
-                ...(isValidUrl(data.oq2) && {
+                content: data.oq2.details,
+                ...(isValidUrl(data.oq2.details) && {
                   link: {
-                    url: data.oq2,
+                    url: data.oq2.details,
                   },
                 }),
               },
@@ -607,10 +607,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
             {
               text: {
-                content: data.oq3,
-                ...(isValidUrl(data.oq3) && {
+                content: data.oq3.details,
+                ...(isValidUrl(data.oq3.details) && {
                   link: {
-                    url: data.oq3,
+                    url: data.oq3.details,
                   },
                 }),
               },
@@ -633,10 +633,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
             {
               text: {
-                content: data.oq4,
-                ...(isValidUrl(data.oq4) && {
+                content: data.oq4.details,
+                ...(isValidUrl(data.oq4.details) && {
                   link: {
-                    url: data.oq4,
+                    url: data.oq4.details,
                   },
                 }),
               },
@@ -659,10 +659,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
             {
               text: {
-                content: data.oq5,
-                ...(isValidUrl(data.oq5) && {
+                content: data.oq5.details,
+                ...(isValidUrl(data.oq5.details) && {
                   link: {
-                    url: data.oq5,
+                    url: data.oq5.details,
                   },
                 }),
               },
@@ -706,7 +706,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.oq6,
+                content: data.oq6.details,
               },
             },
           ],

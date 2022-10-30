@@ -19,6 +19,11 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 
+const { Client } = require("@notionhq/client");
+const notion = new Client({
+  auth: process.env.NOTION_SECRET,
+});
+
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   width: "50%",
   height: 10,
@@ -48,15 +53,36 @@ const Application: NextPage = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitFailed, setSubmitFailed] = React.useState(false);
 
+  function updateProperties(data: any) {
+    return new Promise((resolve, reject) => {
+      fetch("/api/check_bootie_properties", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
   const buildData = () => {
     const data: any = {};
     sections.forEach((section) => {
       section.forEach((item) => {
-        data[item.id] =
-          localStorage.getItem(item.id) !== undefined &&
-          localStorage.getItem(item.id) !== null
-            ? localStorage.getItem(item.id)
-            : "N/A";
+        data[item.id] = {};
+        data[item.id]["details"] = localStorage.getItem(item.id)
+          ? localStorage.getItem(item.id)
+          : "N/A";
+        data[item.id]["notion_id"] = item.notion_id ? item.notion_id : "N/A";
       });
     });
     return data;
@@ -95,7 +121,7 @@ const Application: NextPage = () => {
               item.type === listTypes.RADIO
             ) {
               setOpen(true);
-              document.getElementById(item.id)?.click()
+              document.getElementById(item.id)?.click();
               complete = false;
             }
           });
@@ -106,22 +132,24 @@ const Application: NextPage = () => {
             } else {
               setSubmitted(true);
               const data = buildData();
-              fetch("/api/submit_bootie_info", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              }).then((response) => {
-                if (!response.ok) {
-                  setSubmitted(false);
-                  setSubmitFailed(true);
-                } else {
-                  localStorage.clear();
-                  localStorage.setItem("submitted", "true");
-                  router.push("/success");
-                  setSubmitted(false);
-                }
+              updateProperties(data).then(() => {
+                fetch("/api/submit_bootie_info", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                }).then((response) => {
+                  if (!response.ok) {
+                    setSubmitted(false);
+                    setSubmitFailed(true);
+                  } else {
+                    localStorage.clear();
+                    localStorage.setItem("submitted", "true");
+                    router.push("/success");
+                    setSubmitted(false);
+                  }
+                });
               });
             }
           }
