@@ -45,7 +45,7 @@ const section0: Array<any> = [
   {
     key: 6,
     id: "preferredPronouns",
-    notion_id: "Preferred Pronouns",
+    notion_id: "Pronouns",
     label: "Preferred Pronouns",
     required: true,
     type: listTypes.RADIO,

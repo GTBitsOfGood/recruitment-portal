@@ -21,33 +21,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   const data = req.body;
-
-  const response = await notion.databases.retrieve({
+  const response: any = {};
+  const notion_info = await notion.databases.retrieve({
     database_id: process.env.NOTION_BOOTIE_DB,
   });
 
   for (const property in data) {
-    console.log("loop");
-    if (data[property].notion_id === "N/A") {
-      console.log("N/A");
-      updateDatabaseWithID(property);
-    } else {
-      console.log("not N/A");
-      if (!response.properties.hasOwnProperty(data[property].notion_id)) {
-        // account for when the notion_id is N/A
-        console.log("not N/A");
-        updateDatabaseWithNotionID(property);
-
-        // const newResponse = await notion.databases.retrieve({
-        //   database_id: process.env.NOTION_BOOTIE_DB,
-        // });
-
-        // res.status(200).json(newResponse);
+    const id = data[property].notion_id;
+    if (id !== "N/A") {
+      if (!notion_info.properties.hasOwnProperty(id)) {
+        const data: any = await updateDatabaseWithNotionID(id);
+        response[id] = data.properties[id];
       }
     }
   }
 
-  function updateDatabaseWithNotionID(property: any) {
+  function updateDatabaseWithNotionID(notion_id: string) {
     const options = {
       method: "PATCH",
       headers: {
@@ -57,80 +46,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       body: JSON.stringify({
         properties: {
-          [property.notion_id]: {
+          [notion_id]: {
             rich_text: {},
           },
         },
       }),
     };
 
-    fetch(
-      `https://api.notion.com/v1/databases/${process.env.NOTION_BOOTIE_DB}`,
-      options
-    )
-      .then((response) => {
-        console.log("Update API Successful!");
-      })
-      .catch((error) => {
-        console.log("Update API Failed!");
-      });
+    return new Promise((resolve, reject) => {
+      fetch(
+        `https://api.notion.com/v1/databases/${process.env.NOTION_BOOTIE_DB}`,
+        options
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 
-  function updateDatabaseWithID(property: any) {
-    const options = {
-      method: "PATCH",
-      headers: {
-        Authorization: `${process.env.NOTION_SECRET}`,
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        properties: {
-          [property.id]: {
-            rich_text: {},
-          },
-        },
-      }),
-    };
-
-    fetch(
-      `https://api.notion.com/v1/databases/${process.env.NOTION_BOOTIE_DB}`,
-      options
-    )
-      .then((response) => {
-        console.log("Update API Successful!");
-      })
-      .catch((error) => {
-        console.log("Update API Failed!");
-      });
-  }
-
-  console.log("hi");
-
-  console.log(response.properties);
-
-  // const options = {
-  //   method: "PATCH",
-  //   headers: {
-  //     Authorization: process.env.NOTION_SECRET,
-  //     "Notion-Version": "2022-06-28",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     properties: {
-  //       "Date Solved": {
-  //         name: "Date Created",
-  //         id: "date_solved",
-  //         rich_text: {},
-  //       },
-  //     },
-  //   }),
-  // };
-
-  // fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DB}`, options)
-  //   .then((response) => response.json())
-  //   .then((response) => console.log(response.properties))
-  //   .catch((error) => console.log(error));
-
-  res.status(200).json("hi");
+  res.status(200).json(response);
 };
