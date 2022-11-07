@@ -24,43 +24,36 @@ const QuestionCard = () => {
     const [reloadCard, setReloadCard] = useState(false);
 
     async function deleteQuestion(id: string) {
-        const localClient = contentful.createClient({
-            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
-        })
-
-        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
-        const environment = await space.getEnvironment("master");
-
-        const entry = await environment.getEntry(id)
-        const res = await entry.delete();
+        const res = await fetch("/api/contentful_connection", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+        });
     }
 
     useEffect(() => {
-        async function connectDB() {
-            const localClient = contentful.createClient({
-                accessToken: "CFPAT--J4DoFKGFT_1M7kFCDiB30wVpzkPYQu8cv6uI6Rtwlo"
-            })
-
-            // process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
-            // process.env.REACT_APP_CONTENTFUL_SPACE_ID!
-
-            const space = await localClient.getSpace("odv2pefe6lpx");
-            const environment = await space.getEnvironment("master");
-            const entries = await environment.getEntries({
-                content_type: "developerRecruitmentQuestions",
+        async function getData() {
+            const res = await fetch("/api/contentful_connection", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
             });
-
-            entries.items.sort((a, b) => a.fields.key["en-US"] - b.fields.key["en-US"])
-            setEntries(entries.items);
+            const entries = await res.json()
+            entries.response.sort((a, b) => a.fields.key["en-US"] - b.fields.key["en-US"])
+            setEntries(entries.response);
             setLoaded(true);
         }
 
-        connectDB().catch(console.error)
+        getData()
         setReloadCard(false);
     }, [])
 
     return (
         <>
+            <Typography variant="h3">Form Name</Typography>
             <CreateQuestion />
             <Typography>Preview and edit the questions:</Typography>
             {

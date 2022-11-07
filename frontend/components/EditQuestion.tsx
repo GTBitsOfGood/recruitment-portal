@@ -36,32 +36,19 @@ const EditQuestion = ({ questionNumberIn, questionIn, typeIn, wordLimitIn, radio
     }
 
     async function saveData(data: any) {
-        const localClient = contentful.createClient({
-            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
-        })
-
-        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
-        const environment = await space.getEnvironment("master");
-        const entries = await environment.getEntries({
-            content_type: "developerRecruitmentQuestions",
+        const res = await fetch("/api/contentful_connection", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         });
-
-        const entry = await environment.getEntry(id);
-        entry.fields.question["en-US"] = data.question
-        entry.fields.type["en-US"] = data.type
-        entry.fields.key["en-US"] = data.questionNumber
-        entry.fields.required["en-US"] = data.required
-        entry.fields.wordLimit["en-US"] = data.wordLimit
-        if (!(radioOptions.length == 0)) {
-            entry.fields.radioOptions = { ["en-US"]: data.radioOptions }
-        }
-        const response = await entry.update()
     }
 
     return (
         <Card component="form" onSubmit={(e: any) => {
             e.preventDefault();
-            const data = { question, type, wordLimit, required, radioOptions, questionNumber }
+            const data = { question, type, wordLimit, required, radioOptions, questionNumber, id, radioOptionsLength: radioOptions.length }
             saveData(data);
         }}>
 

@@ -12,39 +12,15 @@ const CreateQuestion = () => {
     const [newRadio, setNewRadio] = useState("");
 
     const router = useRouter();
-    if (
-        typeof window !== "undefined" &&
-        localStorage.getItem("submitted") !== null
-    ) {
-        router.replace("/success");
-    }
 
     async function saveData(data: any) {
-        const localClient = contentful.createClient({
-            accessToken: process.env.REACT_APP_PERSONAL_ACCESS_TOKEN!
-        })
-
-        const space = await localClient.getSpace(process.env.REACT_APP_CONTENTFUL_SPACE_ID!);
-        const environment = await space.getEnvironment("master");
-        const entries = await environment.getEntries({
-            content_type: "developerRecruitmentQuestions",
+        const response = await fetch("/api/contentful_connection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         });
-        const length = entries.items.length;
-
-
-        const response = await environment.createEntry(
-            "developerRecruitmentQuestions",
-            {
-                fields: {
-                    question: { "en-US": data.question },
-                    key: { "en-US": length + 1 },
-                    type: { "en-US": data.type },
-                    required: { "en-US": data.required },
-                    wordLimit: { "en-US": data.wordLimit },
-                    radioOptions: { "en-US": data.radioOptions },
-                },
-            }
-        );
 
         if (response) {
             setQuestion("");
