@@ -11,8 +11,6 @@ const CreateQuestion = () => {
     const [radioOptions, setRadioOptions] = useState<String[]>([]);
     const [newRadio, setNewRadio] = useState("");
 
-    const router = useRouter();
-
     async function saveData(data: any) {
         const response = await fetch("/api/contentful_connection", {
             method: "POST",

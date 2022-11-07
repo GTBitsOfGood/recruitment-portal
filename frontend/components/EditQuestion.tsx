@@ -27,14 +27,6 @@ const EditQuestion = ({ questionNumberIn, questionIn, typeIn, wordLimitIn, radio
         setId(questionId);
     }, [])
 
-    const router = useRouter();
-    if (
-        typeof window !== "undefined" &&
-        localStorage.getItem("submitted") !== null
-    ) {
-        router.replace("/success");
-    }
-
     async function saveData(data: any) {
         const res = await fetch("/api/contentful_connection", {
             method: "PUT",
