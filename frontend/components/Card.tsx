@@ -9,9 +9,10 @@ interface AppProps {
   id: string;
   label: string;
   required?: boolean;
+  wordLimit: number;
 }
 
-export default function CustomCard({ id, label, required = false }: AppProps) {
+export default function CustomCard({ id, label, required = false, wordLimit }: AppProps) {
   let defaultVal = null;
   if (!(typeof window === "undefined")) {
     defaultVal = localStorage.getItem(id) ? localStorage.getItem(id) : "";
@@ -20,6 +21,7 @@ export default function CustomCard({ id, label, required = false }: AppProps) {
   const [error, setError] = React.useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.value = wordLimit ? event.target.value.split(" ").slice(0, wordLimit).join(" ") : event.target.value
     setVal(event.target.value);
     localStorage.setItem(id, event.target.value);
     setError(false);

@@ -128,7 +128,7 @@ const Application: NextPage = () => {
         }}
       >
         {sections[currSection]?.map((item) => {
-          if (item.type === undefined) {
+          if (item.type === undefined || item.type == "text") {
             return (
               <>
                 <BasicCard
@@ -136,6 +136,7 @@ const Application: NextPage = () => {
                   id={item.id}
                   label={item.label}
                   required={item.required}
+                  wordLimit={item.wordLimit}
                 />
                 <br />
               </>
