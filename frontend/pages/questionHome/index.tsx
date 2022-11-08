@@ -1,4 +1,3 @@
-import CreateQuestion from "../../components/CreateQuestion"
 import { Box, Button, Input, InputLabel, List, ListItem, OutlinedInput, Select, Typography, MenuItem, Card, Modal } from "@mui/material";
 import QuestionCard from "../../components/QuestionCard";
 
