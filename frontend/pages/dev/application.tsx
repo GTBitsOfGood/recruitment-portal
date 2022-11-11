@@ -188,27 +188,6 @@ const Application: NextPage = () => {
             <Alert severity="error">Please fill out all required fields</Alert>
           </Snackbar>
         </div>
-        <div>
-        <Snackbar open={submitFailed} onClose={() => setSubmitFailed(false)}>
-          <Alert severity="error">Application failed to submit</Alert>
-        </Snackbar>
-        </div>
-        <Modal
-          open={submitted}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Please wait while we process your application...
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Did you know that it&apos;s illegal to own just one guinea pig in
-              Switzerland. &#128022; It&apos;s considered animal abuse because
-              they&apos;re social beings and get lonely. &#129402;
-            </Typography>
-          </Box>
-        </Modal>
       </div>
       }
       {preview && <div style={{width:'60%'}}>
@@ -227,8 +206,8 @@ const Application: NextPage = () => {
                 return (
                   <div>
                     <span style={{padding: '1% 5%', display: 'inline-flex', width: '100%'}}>
-                      <Typography sx={{width: '30%'}}>{item.label}</Typography>
-                      <Typography sx={{width: '65%', padding:'0% 0% 0% 5%'}}>{data[item.id]}</Typography>
+                      <Typography sx={{width: '30%', overflowWrap: "anywhere"}}>{item.label}</Typography>
+                      <Typography sx={{width: '65%', padding:'0% 0% 0% 5%', overflowWrap: "anywhere"}}>{data[item.id]}</Typography>
                     </span>
                     <Divider />
                   </div>
@@ -261,6 +240,27 @@ const Application: NextPage = () => {
             }
           });
         }}>Submit</Button>
+        <div>
+        <Snackbar open={submitFailed} onClose={() => setSubmitFailed(false)}>
+          <Alert severity="error">Application failed to submit</Alert>
+        </Snackbar>
+        </div>
+        <Modal
+          open={submitted}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Please wait while we process your application...
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Did you know that it&apos;s illegal to own just one guinea pig in
+              Switzerland. &#128022; It&apos;s considered animal abuse because
+              they&apos;re social beings and get lonely. &#129402;
+            </Typography>
+          </Box>
+        </Modal>
       </div>}
     </main>
   );
