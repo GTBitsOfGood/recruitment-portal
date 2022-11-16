@@ -57,7 +57,7 @@ export default function CustomCard({ id, label, required = false, wordLimit }: A
                 paddingTop: 0,
                 display: "flex",
                 alignItems: "center",
-                color: wordCount > 100 ? "red" : "white",
+                color: wordCount >= wordLimit ? "red" : "white",
               }}
             >
               <div>{wordCount}/{wordLimit} words</div>
