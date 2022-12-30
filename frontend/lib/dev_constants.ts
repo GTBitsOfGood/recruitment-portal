@@ -136,6 +136,7 @@ const section0: Array<any> = [
       "this semester (Spring 2022 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
+    wordLimit: 100,
   },
 ];
 

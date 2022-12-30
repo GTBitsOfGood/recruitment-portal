@@ -54,8 +54,8 @@ const Dev: NextPage = () => {
             .
             <br />
             <br />
-            This is the application to be a Bits of Good Developer for Fall
-            2022!
+            This is the application to be a Bits of Good Developer for Spring
+            2023!
             <br />
             <a
               target="_blank"
@@ -66,15 +66,28 @@ const Dev: NextPage = () => {
             </a>{" "}
             to learn more about developers at Bits of Good &#128187;
             <h3>Important dates</h3>
-            Deadline: 11:59 PM, August 30, 2022
+            General Deadline: 11:59 PM, January 17, 2023
             <br />
-            Latest Decision Date: September 5, 2022
+            Latest Decision Date: January 20, 2023
+            <br />
+            <br />
+            We take time and meticulously review{" "}
+            <b>
+              every application that is submitted before the deadline.
+            </b> You <b>may</b> be invited to interview with us once you submit
+            your application. Please refrain from mailing us regarding the
+            status of your application prior to the latest decision date. We try
+            our best to interview as many candidates as possible, however due to
+            the sheer volume of applications and limited resources at our
+            disposal we may not be able to offer an interview to everyone that
+            applies. Not getting an interview <b>does not mean</b> your
+            application has been rejected.
             <br />
             <br />
             Note: If you are accepted, we do have a mandatory Launch Party at
             the beginning of each semester. This is a great opportunity to meet
             other club members, get to know your project team and network with
-            nonprofits! The date is <b>September 6, 2022 from 6:30-9PM</b>.
+            nonprofits! The date is <b>January 24, 2022 from 6:30-9PM</b>.
             <br />
             <br />
             Please make sure to add{" "}
