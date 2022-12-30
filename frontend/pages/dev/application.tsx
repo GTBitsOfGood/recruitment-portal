@@ -142,36 +142,41 @@ const Application: NextPage = () => {
                 </>
               );
             }
-          })}
-          <div className={styles.controls}>
-            <div className={styles.g1}>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  if (currSection > 0) {
-                    setCurrSection(currSection - 1);
-                    window.scroll(0, 0);
-                  } else {
-                    history.back();
-                  }
-                }}
-              >
-                Back
-              </Button>
-              &nbsp;&nbsp;
-              <Button type="submit" variant="outlined">
-                {currSection !== sections.length - 1 ? "Next" : "Submit"}
-              </Button>
-            </div>
-            <div className={styles.progressContainer}>
-              <BorderLinearProgress
-                variant="determinate"
-                value={((currSection + 1) / sections.length) * 100}
-              />
-              <span>
-                Page {currSection + 1} of {sections.length}
-              </span>
-            </div>
+          }
+        }}
+      >
+        {sections[currSection]?.map((item) => {
+          if (item.type === undefined || item.type == "text") {
+            return (
+              <>
+                <BasicCard
+                  key={item.id}
+                  id={item.id}
+                  label={item.label}
+                  required={item.required}
+                  wordLimit={item.wordLimit}
+                />
+                <br />
+              </>
+            );
+          } else if (item.type === listTypes.RADIO) {
+            return (
+              <>
+                <RadioCard
+                  key={item.id}
+                  id={item.id}
+                  label={item.label}
+                  required={item.required}
+                  radioOptions={item.radioOptions}
+                  hasOther={item.hasOther}
+                />
+                <br />
+              </>
+            );
+          }
+        })}
+        <div className={styles.controls}>
+          <div className={styles.g1}>
             <Button
               variant="text"
               onClick={() => {
