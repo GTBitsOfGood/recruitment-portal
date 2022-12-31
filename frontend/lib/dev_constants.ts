@@ -186,18 +186,18 @@ const section2: Array<any> = [
     radioOptions: ["Frontend", "Backend", "Fullstack"],
   },
   {
-    key: 22,
+    key: 21,
     id: "psq3",
-    label:
-      "What is the most technically challenging project that you have worked on? " +
-      "Be sure to dive deep into the technical aspects of the project. [250 words]",
-    required: true,
+    label: "What is your favourite pokemon?",
+    required: false,
   },
   {
     key: 23,
     id: "psq4",
     label:
-      "If you don’t have a project to talk about, or fear that your particular project in the previous question doesn’t demonstrate your web development capabilities to the best of your ability, please take this simple take-home assessment: https://github.com/GTBitsOfGood/fall2021-dev-takehome. After you have finished, please discuss your home assessment below (max 1200 characters) and include a link to your public repository.",
+      "We would like to see your practical ability through a simple take-home " +
+      "assessment: https://github.com/GTBitsOfGood/spring23-dev-assessment. Please" +
+      "include a link to your public repository after you have completed the assessment.",
     required: true,
   },
   {

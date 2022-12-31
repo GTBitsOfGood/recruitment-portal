@@ -119,107 +119,106 @@ const section0: Array<any> = [
       "and which semester(s)?",
     required: false,
   },
+  {
+    key: 19,
+    id: "discovery",
+    label: "How did you find out about Bits of Good?",
+    required: true,
+    type: listTypes.RADIO,
+    hasOther: false,
+    radioOptions: [
+      "Current BoG Member",
+      "BoG website",
+      "Flyers",
+      "Org Fair",
+      "Instagram",
+      "Other",
+    ],
+  },
 ];
 
 const section1: Array<any> = [
   {
-    key: 19,
+    key: 20,
     id: "gq1",
     label:
-      "What motivates you to join Bits of Good? Feel free to share your past " +
-      "experiences related to social good, volunteering, or nonprofits in " +
-      "either high school or college. [800 chars]",
-    required: true,
-  },
-  {
-    key: 20,
-    id: "gq2",
-    label:
-      "While you’re in Bits of Good you’ll be working on a team. " +
-      "Talk about a time you had a disagreement while working on a team. " +
-      "How did you come up with a resolution? [800 chars]",
+      "Describe your experience in web development/programming?" +
+      "(programming languages, CS courses, projects, etc)",
     required: true,
   },
   {
     key: 21,
+    id: "gq2",
+    label: "Tell us about an involvement you are passionate about.",
+    required: true,
+  },
+  {
+    key: 22,
     id: "gq3",
     label:
-      "If you had all the time and all the resources in the world, " +
-      "what would you do? [800 chars]",
+      "Talk about a time you had a disagreement while working on" +
+      "a team. How did you come up with a resolution?",
+    required: true,
+  },
+  {
+    key: 23,
+    id: "psq1",
+    label:
+      "What motivates you to join Bits of Good? Feel free to share" +
+      "your past experiences related to social good, volunteering, or" +
+      "nonprofits in either high school or college.",
     required: true,
   },
 ];
 
 const section2: Array<any> = [
   {
-    key: 22,
-    id: "psq1",
-    label:
-      "How much experience do you have in programming/web development? [500 chars]",
-    required: true,
-  },
-  {
-    key: 23,
-    id: "psq2",
-    label:
-      "Describe an experience where you enjoyed working with your team. " +
-      "What was the team dynamic like and what were you able to accomplish " +
-      "as a result? [800 chars]",
-    required: true,
-  },
-  {
     key: 24,
-    id: "psq3",
+    id: "takehome",
     label:
-      "Tell us about an involvement you are passionate about. " +
-      "This can either be something you've done at GT or when you were in " +
-      "high school. [800 chars]",
-    required: true,
-  },
-  {
-    key: 25,
-    id: "psq4",
-    label:
-      "Describe one aspect of Bits of Good that you would add or " +
-      "change if you were director. [500 chars]",
+      "We would like to see your html/css experience through" +
+      " a simple take-home assessment: " +
+      "https://github.com/GTBitsOfGood/spring23-dev-bootcamp-assessment." +
+      "Please include a link to your public repository after" +
+      "you have completed the assessment.",
     required: true,
   },
 ];
 
 const section3: Array<any> = [
   {
-    key: 26,
+    key: 25,
     id: "oq1",
     label:
       "Link to your resume (we recommend uploading it to google driving and sharing)",
     required: false,
   },
   {
-    key: 27,
+    key: 26,
     id: "oq2",
     label: "Link to your GitHub",
     required: false,
   },
   {
-    key: 28,
+    key: 27,
     id: "oq3",
     label: "Link to your LinkedIn",
     required: false,
   },
   {
-    key: 29,
+    key: 28,
     id: "oq4",
     label: "Link to your Personal site/Portfolio",
     required: false,
   },
   {
-    key: 30,
+    key: 29,
     id: "oq5",
     label: "Any other links?",
     required: false,
   },
   {
-    key: 31,
+    key: 30,
     id: "oq6",
     label:
       "Anything you'd like to add or note that wasn't conveyed in the application?",
