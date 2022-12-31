@@ -284,10 +284,10 @@ const Application: NextPage = () => {
                   setSubmitted(false);
                   setSubmitFailed(true);
                 } else {
-                  localStorage.clear();
-                  localStorage.setItem("submitted", "true");
-                  router.push("/success");
-                  setSubmitted(false);
+                  // localStorage.clear();
+                  // localStorage.setItem("submitted", "true");
+                  // router.push("/success");
+                  // setSubmitted(false);
                 }
               });
             }}
