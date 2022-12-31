@@ -9,18 +9,31 @@ interface AppProps {
   id: string;
   label: string;
   required?: boolean;
+  wordLimit?: number;
 }
 
-export default function CustomCard({ id, label, required = false }: AppProps) {
+export default function CustomCard({
+  id,
+  label,
+  required = false,
+  wordLimit,
+}: AppProps) {
   let defaultVal = null;
   if (!(typeof window === "undefined")) {
     defaultVal = localStorage.getItem(id) ? localStorage.getItem(id) : "";
   }
   const [val, setVal] = React.useState(defaultVal ? defaultVal : "");
   const [error, setError] = React.useState(false);
+  const [wordCount, setWordCount] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.value = wordLimit
+      ? event.target.value.split(" ").slice(0, wordLimit).join(" ")
+      : event.target.value;
     setVal(event.target.value);
+    setWordCount(
+      event.target.value === "" ? 0 : event.target.value.split(" ").length
+    );
     localStorage.setItem(id, event.target.value);
     setError(false);
   };
@@ -46,19 +59,36 @@ export default function CustomCard({ id, label, required = false }: AppProps) {
           id={id}
           error={error}
           helperText={
-            error && (
-              <Typography
-                sx={{
-                  fontSize: 12,
-                  paddingTop: 2,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <ErrorOutlineIcon />
-                &nbsp;&nbsp;<div>This is a required question</div>
-              </Typography>
-            )
+            <div>
+              {wordLimit && (
+                <Typography
+                  sx={{
+                    fontSize: 12,
+                    paddingTop: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    color: wordCount >= wordLimit ? "red" : "white",
+                  }}
+                >
+                  <div>
+                    {wordCount}/{wordLimit} words
+                  </div>
+                </Typography>
+              )}
+              {error && (
+                <Typography
+                  sx={{
+                    fontSize: 12,
+                    paddingTop: 2,
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <ErrorOutlineIcon />
+                  &nbsp;&nbsp;<div>This is a required question</div>
+                </Typography>
+              )}
+            </div>
           }
           variant="standard"
           sx={{ width: "50%" }}
