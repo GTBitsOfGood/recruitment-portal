@@ -21,9 +21,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   const data = req.body;
-  const pageNumber = await notion.databases.query({
+  const latestApp = await notion.databases.query({
     database_id: process.env.NOTION_BOOTIE_DB,
+    sorts: [
+      {
+        timestamp: "created_time",
+        direction: "descending",
+      },
+    ],
+    page_size: 1,
   });
+
+  const appNumber = latestApp?.results[0]?.properties?.id?.title[0]?.plain_text;
+
   const response = await notion.pages.create({
     parent: {
       type: "database_id",
@@ -34,9 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         title: [
           {
             text: {
-              content: pageNumber?.results?.length
-                ? (pageNumber?.results?.length + 1).toString()
-                : "1",
+              content: appNumber ? (parseInt(appNumber) + 1).toString() : "1",
             },
           },
         ],
@@ -179,11 +187,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           },
         ],
       },
+      "Other availability concerns": {
+        rich_text: [
+          {
+            text: {
+              content: data.otherAvailabilityConcerns,
+            },
+          },
+        ],
+      },
       "Previously Applied": {
         rich_text: [
           {
             text: {
               content: data.previouslyApplied,
+            },
+          },
+        ],
+      },
+      "How did you find out about BoG?": {
+        rich_text: [
+          {
+            text: {
+              content: data.discovery,
             },
           },
         ],
@@ -209,9 +235,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "1. What motivates you to join Bits of Good? Feel free to share your past " +
-                  "experiences related to social good, volunteering, or nonprofits in " +
-                  "either high school or college.",
+                  "1. Describe your experience in web development/programming? " +
+                  "(programming languages, CS courses, projects, etc)",
               },
               annotations: {
                 bold: true,
@@ -253,9 +278,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "2. While you’re in Bits of Good you’ll be working on a team. " +
-                  "Talk about a time you had a disagreement while working on a team. " +
-                  "How did you come up with a resolution?",
+                  "2. Tell us about an involvement you are passionate about. ",
               },
               annotations: {
                 bold: true,
@@ -297,7 +320,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "3. If you had all the time and all the resources in the world, what would you do?",
+                  "3. Talk about a time you had a disagreement while working on " +
+                  "a team. How did you come up with a resolution?",
               },
               annotations: {
                 bold: true,
@@ -321,14 +345,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       {
         object: "block",
-        heading_2: {
+        paragraph: {
           rich_text: [
             {
               text: {
-                content: "Position specific questions",
+                content: "",
               },
             },
           ],
+          color: "default",
         },
       },
       {
@@ -338,7 +363,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "1. How much experience do you have in programming/web development?",
+                  "4. What motivates you to join Bits of Good? Feel free to share " +
+                  "your past experiences related to social good, volunteering, or " +
+                  "nonprofits in either high school or college.",
               },
               annotations: {
                 bold: true,
@@ -353,7 +380,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: data.psq1,
+                content: data.gq4,
               },
             },
           ],
@@ -379,131 +406,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content:
-                  "2. Describe an experience where you enjoyed working with your team. " +
-                  "What was the team dynamic like and what were you able to accomplish " +
-                  "as a result? [800 chars]",
+                content: "Takehome: ",
               },
               annotations: {
                 bold: true,
               },
             },
-          ],
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
             {
               text: {
-                content: data.psq2,
+                content: data.takehome,
+                ...(isValidUrl(data.takehome) && {
+                  link: {
+                    url: data.takehome,
+                  },
+                }),
               },
             },
           ],
-          color: "default",
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: "",
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      // psq3
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content:
-                  "3. Tell us about an involvement you are passionate about. " +
-                  "This can either be something you've done at GT or when you were in " +
-                  "high school. [800 chars]",
-              },
-              annotations: {
-                bold: true,
-              },
-            },
-          ],
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: data.psq3,
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: "",
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      // psq4
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content:
-                  "4. Describe one aspect of Bits of Good that you would add or " +
-                  "change if you were director. [500 chars]",
-              },
-              annotations: {
-                bold: true,
-              },
-            },
-          ],
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: data.psq4,
-              },
-            },
-          ],
-          color: "default",
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: "",
-              },
-            },
-          ],
-          color: "default",
         },
       },
       // Others

@@ -76,197 +76,226 @@ const Application: NextPage = () => {
       </Head>
       <BoGCard />
       <br />
-      {!preview && 
-      <div>
-        <Box
-          component="form"
-          autoComplete="off"
-          onSubmit={(evt: any) => {
-            var complete = true;
-            sections[currSection].forEach((item) => {
-              evt.preventDefault();
-              if (
-                item.required &&
-                evt.target[item.id]?.value === "" &&
-                item.type === undefined
-              ) {
-                document.getElementById(item.id)?.focus();
-                document.getElementById(item.id)?.blur();
-                complete = false;
-              } else if (
-                item.required &&
-                evt.target[item.id]?.value === "" &&
-                item.type === listTypes.RADIO
-              ) {
-                setOpen(true);
-                document.getElementById(item.id)?.click()
-                complete = false;
-              }
-            });
-            if (complete) {
-              if (currSection < sections.length - 1) {
-                setCurrSection(currSection + 1);
-                window.scroll(0, 0);
-              } else {
-                const data = buildData();
-                setPreview(true);
-              }
-            }
-          }}
-        >
-          {sections[currSection]?.map((item) => {
-            if (item.type === undefined) {
-              return (
-                <>
-                  <BasicCard
-                    key={item.id}
-                    id={item.id}
-                    label={item.label}
-                    required={item.required}
-                  />
-                  <br />
-                </>
-              );
-            } else if (item.type === listTypes.RADIO) {
-              return (
-                <>
-                  <RadioCard
-                    key={item.id}
-                    id={item.id}
-                    label={item.label}
-                    required={item.required}
-                    radioOptions={item.radioOptions}
-                    hasOther={item.hasOther}
-                  />
-                  <br />
-                </>
-              );
-            }
-          }
-        }}
-      >
-        {sections[currSection]?.map((item) => {
-          if (item.type === undefined || item.type == "text") {
-            return (
-              <>
-                <BasicCard
-                  key={item.id}
-                  id={item.id}
-                  label={item.label}
-                  required={item.required}
-                  wordLimit={item.wordLimit}
-                />
-                <br />
-              </>
-            );
-          } else if (item.type === listTypes.RADIO) {
-            return (
-              <>
-                <RadioCard
-                  key={item.id}
-                  id={item.id}
-                  label={item.label}
-                  required={item.required}
-                  radioOptions={item.radioOptions}
-                  hasOther={item.hasOther}
-                />
-                <br />
-              </>
-            );
-          }
-        })}
-        <div className={styles.controls}>
-          <div className={styles.g1}>
-            <Button
-              variant="text"
-              onClick={() => {
-                localStorage.clear();
-                router.reload();
-              }}
-            >
-              Clear Form
-            </Button>
-          </div>
-        </Box>
+      {!preview && (
         <div>
-          <Snackbar open={open} onClose={() => setOpen(false)}>
-            <Alert severity="error">Please fill out all required fields</Alert>
-          </Snackbar>
-        </div>
-      </div>
-      }
-      {preview && <div style={{width:'60%'}}>
-        {sections.map((section, index) => {
-          const data = buildData()
-          return (
-            <div style={{width: '100%', border:'1px solid white', margin: '0% 0% 5% 0%', padding: '3% 5% 5% 5%', borderRadius: '1%'}}>
-              <Button 
-              variant="outlined"
-              style={{float:"right"}}
-              onClick={() => {
-                setCurrSection(index);
-                setPreview(false);
-              }}>Edit</Button>
-              {section.map((item) => {
+          <Box
+            component="form"
+            autoComplete="off"
+            onSubmit={(evt: any) => {
+              var complete = true;
+              sections[currSection].forEach((item) => {
+                evt.preventDefault();
+                if (
+                  item.required &&
+                  evt.target[item.id]?.value === "" &&
+                  item.type === undefined
+                ) {
+                  document.getElementById(item.id)?.focus();
+                  document.getElementById(item.id)?.blur();
+                  complete = false;
+                } else if (
+                  item.required &&
+                  evt.target[item.id]?.value === "" &&
+                  item.type === listTypes.RADIO
+                ) {
+                  setOpen(true);
+                  document.getElementById(item.id)?.click();
+                  complete = false;
+                }
+              });
+              if (complete) {
+                if (currSection < sections.length - 1) {
+                  setCurrSection(currSection + 1);
+                  window.scroll(0, 0);
+                } else {
+                  const data = buildData();
+                  setPreview(true);
+                }
+              }
+            }}
+          >
+            {sections[currSection]?.map((item) => {
+              if (item.type === undefined) {
                 return (
-                  <div>
-                    <span style={{padding: '1% 5%', display: 'inline-flex', width: '100%'}}>
-                      <Typography sx={{width: '30%', overflowWrap: "anywhere"}}>{item.label}</Typography>
-                      <Typography sx={{width: '65%', padding:'0% 0% 0% 5%', overflowWrap: "anywhere"}}>{data[item.id]}</Typography>
-                    </span>
-                    <Divider />
-                  </div>
+                  <>
+                    <BasicCard
+                      key={item.id}
+                      id={item.id}
+                      label={item.label}
+                      required={item.required}
+                    />
+                    <br />
+                  </>
                 );
-              })}
+              } else if (item.type === listTypes.RADIO) {
+                return (
+                  <>
+                    <RadioCard
+                      key={item.id}
+                      id={item.id}
+                      label={item.label}
+                      required={item.required}
+                      radioOptions={item.radioOptions}
+                      hasOther={item.hasOther}
+                    />
+                    <br />
+                  </>
+                );
+              }
+            })}
+            <div className={styles.controls}>
+              <div className={styles.g1}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    if (currSection > 0) {
+                      setCurrSection(currSection - 1);
+                      window.scroll(0, 0);
+                    } else {
+                      history.back();
+                    }
+                  }}
+                >
+                  Back
+                </Button>
+                &nbsp;&nbsp;
+                <Button type="submit" variant="outlined">
+                  {currSection !== sections.length - 1 ? "Next" : "Submit"}
+                </Button>
+              </div>
+              <div className={styles.progressContainer}>
+                <BorderLinearProgress
+                  variant="determinate"
+                  value={((currSection + 1) / sections.length) * 100}
+                />
+                <span>
+                  Page {currSection + 1} of {sections.length}
+                </span>
+              </div>
+              <Button
+                variant="text"
+                onClick={() => {
+                  localStorage.clear();
+                  router.reload();
+                }}
+              >
+                Clear Form
+              </Button>
             </div>
-          );
-        })}
-        <Button
-        variant="outlined"
-        onClick={()=>{
-          setSubmitted(true);
-          const data = buildData();
-
-          fetch("/api/submit_dev_info", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }).then((response) => {
-            if (!response.ok) {
-              setSubmitted(false);
-              setSubmitFailed(true);
-            } else {
-              localStorage.clear();
-              localStorage.setItem("submitted", "true");
-              router.push("/success");
-              setSubmitted(false);
-            }
-          });
-        }}>Submit</Button>
-        <div>
-        <Snackbar open={submitFailed} onClose={() => setSubmitFailed(false)}>
-          <Alert severity="error">Application failed to submit</Alert>
-        </Snackbar>
-        </div>
-        <Modal
-          open={submitted}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Please wait while we process your application...
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Did you know that it&apos;s illegal to own just one guinea pig in
-              Switzerland. &#128022; It&apos;s considered animal abuse because
-              they&apos;re social beings and get lonely. &#129402;
-            </Typography>
           </Box>
-        </Modal>
-      </div>}
+          <div>
+            <Snackbar open={open} onClose={() => setOpen(false)}>
+              <Alert severity="error">
+                Please fill out all required fields
+              </Alert>
+            </Snackbar>
+          </div>
+          <div>
+            <Snackbar
+              open={submitFailed}
+              onClose={() => setSubmitFailed(false)}
+            >
+              <Alert severity="error">Application failed to submit</Alert>
+            </Snackbar>
+          </div>
+          <Modal
+            open={submitted}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Please wait while we process your application...
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Did you know that it&apos;s illegal to own just one guinea pig
+                in Switzerland. &#128022; It&apos;s considered animal abuse
+                because they&apos;re social beings and get lonely. &#129402;
+              </Typography>
+            </Box>
+          </Modal>
+        </div>
+      )}
+      {preview && (
+        <div style={{ width: "60%" }}>
+          {sections.map((section, index) => {
+            const data = buildData();
+            return (
+              <div
+                key={index}
+                style={{
+                  width: "100%",
+                  border: "1px solid white",
+                  margin: "0% 0% 5% 0%",
+                  padding: "3% 5% 5% 5%",
+                  borderRadius: "1%",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  style={{ float: "right" }}
+                  onClick={() => {
+                    setCurrSection(index);
+                    setPreview(false);
+                  }}
+                >
+                  Edit
+                </Button>
+                {section.map((item) => {
+                  return (
+                    <div key={item.id}>
+                      <span
+                        style={{
+                          padding: "1% 5%",
+                          display: "inline-flex",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography sx={{ width: "30%" }}>
+                          {item.label}
+                        </Typography>
+                        <Typography
+                          sx={{ width: "65%", padding: "0% 0% 0% 5%" }}
+                        >
+                          {data[item.id]}
+                        </Typography>
+                      </span>
+                      <Divider />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setSubmitted(true);
+              const data = buildData();
+
+              fetch("/api/submit_dev_info", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }).then((response) => {
+                if (!response.ok) {
+                  setSubmitted(false);
+                  setSubmitFailed(true);
+                } else {
+                  localStorage.clear();
+                  localStorage.setItem("submitted", "true");
+                  router.push("/success");
+                  setSubmitted(false);
+                }
+              });
+            }}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
     </main>
   );
 };

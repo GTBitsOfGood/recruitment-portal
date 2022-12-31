@@ -21,9 +21,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   const data = req.body;
-  const pageNumber = await notion.databases.query({
+  const latestApp = await notion.databases.query({
     database_id: process.env.NOTION_DEV_DB,
+    sorts: [
+      {
+        timestamp: "created_time",
+        direction: "descending",
+      },
+    ],
+    page_size: 1,
   });
+
+  const appNumber = latestApp?.results[0]?.properties?.id?.title[0]?.plain_text;
+
   const response = await notion.pages.create({
     parent: {
       type: "database_id",
@@ -34,9 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         title: [
           {
             text: {
-              content: pageNumber?.results?.length
-                ? (pageNumber?.results?.length + 1).toString()
-                : "1",
+              content: appNumber ? (parseInt(appNumber) + 1).toString() : "1",
             },
           },
         ],
@@ -139,6 +147,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           {
             text: {
               content: data.vip,
+            },
+          },
+        ],
+      },
+      "Other Commitments": {
+        rich_text: [
+          {
+            text: {
+              content: data.otherCommitments,
             },
           },
         ],

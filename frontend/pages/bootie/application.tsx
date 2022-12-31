@@ -95,7 +95,7 @@ const Application: NextPage = () => {
               item.type === listTypes.RADIO
             ) {
               setOpen(true);
-              document.getElementById(item.id)?.click()
+              document.getElementById(item.id)?.click();
               complete = false;
             }
           });
