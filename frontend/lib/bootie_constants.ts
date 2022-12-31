@@ -156,16 +156,16 @@ const section1: Array<any> = [
     key: 22,
     id: "gq3",
     label:
-      "Talk about a time you had a disagreement while working on" +
+      "Talk about a time you had a disagreement while working on " +
       "a team. How did you come up with a resolution?",
     required: true,
   },
   {
     key: 23,
-    id: "psq1",
+    id: "gq4",
     label:
-      "What motivates you to join Bits of Good? Feel free to share" +
-      "your past experiences related to social good, volunteering, or" +
+      "What motivates you to join Bits of Good? Feel free to share " +
+      "your past experiences related to social good, volunteering, or " +
       "nonprofits in either high school or college.",
     required: true,
   },
@@ -176,10 +176,10 @@ const section2: Array<any> = [
     key: 24,
     id: "takehome",
     label:
-      "We would like to see your html/css experience through" +
+      "We would like to see your html/css experience through " +
       " a simple take-home assessment: " +
-      "https://github.com/GTBitsOfGood/spring23-dev-bootcamp-assessment." +
-      "Please include a link to your public repository after" +
+      "https://github.com/GTBitsOfGood/spring23-dev-bootcamp-assessment. " +
+      "Please include a link to your public repository after " +
       "you have completed the assessment.",
     required: true,
   },
