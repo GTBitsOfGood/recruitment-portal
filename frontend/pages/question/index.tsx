@@ -1,9 +1,11 @@
-import CreateQuestions from "../../components/CreateQuestions"
+import CreateQuestions from "../../components/CreateQuestions";
+import { useRouter } from "next/router";
 
 const Question = () => {
-    return (
-        <CreateQuestions />
-    )
-}
+  const router = useRouter();
+  router.replace("/");
 
-export default Question
+  return <CreateQuestions />;
+};
+
+export default Question;
