@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     database_id: process.env.NOTION_DEV_DB,
     sorts: [
       {
-        property: "id",
+        timestamp: "created_time",
         direction: "descending",
       },
     ],
