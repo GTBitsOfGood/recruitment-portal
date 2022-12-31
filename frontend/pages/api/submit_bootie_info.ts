@@ -187,11 +187,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           },
         ],
       },
+      "Other availability concerns": {
+        rich_text: [
+          {
+            text: {
+              content: data.otherAvailabilityConcerns,
+            },
+          },
+        ],
+      },
       "Previously Applied": {
         rich_text: [
           {
             text: {
               content: data.previouslyApplied,
+            },
+          },
+        ],
+      },
+      "How did you find out about BoG?": {
+        rich_text: [
+          {
+            text: {
+              content: data.discovery,
             },
           },
         ],
