@@ -196,7 +196,7 @@ const section2: Array<any> = [
     id: "psq4",
     label:
       "We would like to see your practical ability through a simple take-home " +
-      "assessment: https://github.com/GTBitsOfGood/spring23-dev-assessment. Please" +
+      "assessment: https://github.com/GTBitsOfGood/spring23-dev-assessment. Please " +
       "include a link to your public repository after you have completed the assessment.",
     required: true,
   },
