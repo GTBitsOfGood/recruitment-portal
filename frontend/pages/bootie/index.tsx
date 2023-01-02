@@ -76,7 +76,7 @@ const Dev: NextPage = () => {
             Note: If you are accepted, we do have a mandatory Launch Party at
             the beginning of each semester. This is a great opportunity to meet
             other club members, get to know your project team and network with
-            nonprofits! The date is <b>September 6, 2022 from 6:30-9PM</b>.
+            nonprofits! The date is <b>January 24, 2022 from 6:30-9PM</b>.
             <br />
             <br />
             Please make sure to add{" "}
