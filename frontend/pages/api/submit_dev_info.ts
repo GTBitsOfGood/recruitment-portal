@@ -464,27 +464,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content:
-                  "4. If you don’t have a project to talk about, or fear that your particular project in the previous question doesn’t demonstrate your web development capabilities to the best of your ability, please take this simple take-home assessment: https://github.com/GTBitsOfGood/fall2021-dev-takehome. After you have finished, please discuss your home assessment below (max 1200 characters) and include a link to your public repository.",
+                content: "Takehome: " + data.psq4,
               },
               annotations: {
                 bold: true,
               },
             },
           ],
-        },
-      },
-      {
-        object: "block",
-        paragraph: {
-          rich_text: [
-            {
-              text: {
-                content: data.psq4,
-              },
-            },
-          ],
-          color: "default",
         },
       },
       {

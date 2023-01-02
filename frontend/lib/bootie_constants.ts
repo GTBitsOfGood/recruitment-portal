@@ -84,7 +84,7 @@ const section0: Array<any> = [
   {
     key: 14,
     id: "credits",
-    label: "How many credit Hours are you expecting to take this Fall?",
+    label: "How many credit Hours are you expecting to take this Spring?",
     required: true,
   },
   {
