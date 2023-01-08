@@ -464,7 +464,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           rich_text: [
             {
               text: {
-                content: "Takehome: " + data.psq4,
+                content: "4. Takehome: " + data.psq4,
               },
               annotations: {
                 bold: true,
