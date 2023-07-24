@@ -60,6 +60,7 @@ const Home: NextPage = () => {
         </div>
         <br />
         Note: You may only apply to one of these positions!
+        <a className={styles.netlifyLogo} href="https://www.netlify.com/" />
       </main>
     </div>
   );

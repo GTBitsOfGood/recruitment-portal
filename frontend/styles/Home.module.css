@@ -104,6 +104,14 @@
   line-height: 1.5;
 }
 
+.netlifyLogo {
+  background: url('../assets/images/netlify-dark.png');
+  height: 50px;
+  width: 110px;
+  margin-top: 20px;
+  align-self: center;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
