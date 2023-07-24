@@ -18,6 +18,7 @@ export default function CustomCard({
   required = false,
   wordLimit,
 }: AppProps) {
+
   let defaultVal = null;
   if (!(typeof window === "undefined")) {
     defaultVal = localStorage.getItem(id) ? localStorage.getItem(id) : "";

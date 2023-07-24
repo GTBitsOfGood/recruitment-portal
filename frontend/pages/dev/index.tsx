@@ -54,7 +54,7 @@ const Dev: NextPage = () => {
             .
             <br />
             <br />
-            This is the application to be a Bits of Good Developer for Spring
+            This is the application to be a Bits of Good Developer for Fall
             2023!
             <br />
             <a
@@ -66,9 +66,9 @@ const Dev: NextPage = () => {
             </a>{" "}
             to learn more about developers at Bits of Good &#128187;
             <h3>Important dates</h3>
-            General Deadline: 11:59 PM, January 17, 2023
+            General Deadline: 11:59 PM, August 29, 2023
             <br />
-            Latest Decision Date: January 20, 2023
+            Latest Decision Date: September 2, 2023
             <br />
             <br />
             We take time and meticulously review{" "}
@@ -87,7 +87,7 @@ const Dev: NextPage = () => {
             Note: If you are accepted, we do have a mandatory Launch Party at
             the beginning of each semester. This is a great opportunity to meet
             other club members, get to know your project team and network with
-            nonprofits! The date is <b>January 24, 2022 from 6:30-9PM</b>.
+            nonprofits! The date is <b>September 5, 2023 from 6:30-9PM</b>.
             <br />
             <br />
             Please make sure to add{" "}

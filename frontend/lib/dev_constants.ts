@@ -133,10 +133,9 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Spring 2022 or earlier)? If so, what position " +
+      "this semester (Spring 2023 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
-    wordLimit: 100,
   },
 ];
 
@@ -149,6 +148,7 @@ const section1: Array<any> = [
       "Feel free to share your past experiences related to social good, " +
       "volunteering,  or nonprofits in either high school or college. [150 words]",
     required: true,
+    wordLimit: 150,
   },
   {
     key: 18,
@@ -158,6 +158,7 @@ const section1: Array<any> = [
       "Talk about a time you had a disagreement while working on a team. " +
       "How did you come up with a resolution? [100 words]",
     required: true,
+    wordLimit: 100,
   },
   {
     key: 19,
@@ -165,6 +166,7 @@ const section1: Array<any> = [
     label:
       "If you had all the time and all the resources in the world, what would you do? [100 words]",
     required: true,
+    wordLimit: 100,
   },
 ];
 
@@ -174,6 +176,7 @@ const section2: Array<any> = [
     id: "psq1",
     label: "Are you familiar with web-dev? [25 words]",
     required: true,
+    wordLimit: 25
   },
   {
     key: 21,
@@ -188,7 +191,7 @@ const section2: Array<any> = [
   {
     key: 21,
     id: "psq3",
-    label: "What is your favourite pokemon?",
+    label: "What is your favorite pokemon?",
     required: false,
   },
   {
@@ -196,7 +199,7 @@ const section2: Array<any> = [
     id: "psq4",
     label:
       "We would like to see your practical ability through a simple take-home " +
-      "assessment: https://github.com/GTBitsOfGood/spring23-dev-assessment. Please " +
+      "assessment: https://github.com/GTBitsOfGood/fall23-dev-assessment. Please " +
       "include a link to your public repository after you have completed the assessment.",
     required: true,
   },
@@ -207,6 +210,7 @@ const section2: Array<any> = [
       "You’ve been assigned a ticket as a part of your first sprint at Bits of Good " +
       "and you find yourself blocked. How would you go about unblocking yourself? [75 words]",
     required: true,
+    wordLimit: 75,
   },
 ];
 

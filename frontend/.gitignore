@@ -38,3 +38,5 @@ yarn-error.log*
 # lint
 .eslint*.js
 .esline*
+
+.env

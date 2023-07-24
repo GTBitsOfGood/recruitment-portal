@@ -54,7 +54,7 @@ const Application: NextPage = () => {
       section.forEach((item) => {
         data[item.id] =
           localStorage.getItem(item.id) !== undefined &&
-          localStorage.getItem(item.id) !== null
+            localStorage.getItem(item.id) !== null
             ? localStorage.getItem(item.id)
             : "N/A";
       });
@@ -119,6 +119,7 @@ const Application: NextPage = () => {
                 } else {
                   localStorage.clear();
                   localStorage.setItem("submitted", "true");
+                  localStorage.setItem("applicationCycle", process.env.NEXT_PUBLIC_APPLICATION_CYCLE ?? "")
                   router.push("/success");
                   setSubmitted(false);
                 }
@@ -136,6 +137,7 @@ const Application: NextPage = () => {
                   id={item.id}
                   label={item.label}
                   required={item.required}
+                  wordLimit={item.wordLimit}
                 />
                 <br />
               </>

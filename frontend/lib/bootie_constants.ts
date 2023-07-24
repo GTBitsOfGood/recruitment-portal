@@ -84,7 +84,7 @@ const section0: Array<any> = [
   {
     key: 14,
     id: "credits",
-    label: "How many credit Hours are you expecting to take this Spring?",
+    label: "How many credit Hours are you expecting to take this Fall?",
     required: true,
   },
   {
@@ -115,7 +115,7 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Spring 2022 or earlier)? If so, what position " +
+      "this semester (Spring 2023 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
   },
@@ -149,16 +149,18 @@ const section1: Array<any> = [
   {
     key: 21,
     id: "gq2",
-    label: "Tell us about an involvement you are passionate about.",
+    label: "Tell us about an involvement you are passionate about. [100 Words]",
     required: true,
+    wordLimit: 100
   },
   {
     key: 22,
     id: "gq3",
     label:
       "Talk about a time you had a disagreement while working on " +
-      "a team. How did you come up with a resolution?",
+      "a team. How did you come up with a resolution? [200 Words]",
     required: true,
+    wordLimit: 200
   },
   {
     key: 23,
@@ -166,8 +168,9 @@ const section1: Array<any> = [
     label:
       "What motivates you to join Bits of Good? Feel free to share " +
       "your past experiences related to social good, volunteering, or " +
-      "nonprofits in either high school or college.",
+      "nonprofits in either high school or college. [200 Words]",
     required: true,
+    wordLimit: 200
   },
 ];
 
@@ -178,7 +181,7 @@ const section2: Array<any> = [
     label:
       "We would like to see your html/css experience through " +
       " a simple take-home assessment: " +
-      "https://github.com/GTBitsOfGood/spring23-dev-bootcamp-assessment. " +
+      "https://github.com/GTBitsOfGood/fall23-dev-bootcamp-assessment. " +
       "Please include a link to your public repository after " +
       "you have completed the assessment.",
     required: true,

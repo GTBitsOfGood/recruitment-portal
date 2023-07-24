@@ -10,11 +10,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const isValidUrl = (urlString: string) => {
     var urlPattern = new RegExp(
       "^(https?:\\/\\/)?" + // validate protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-        "(\\#[-a-z\\d_]*)?$",
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
+      "(\\#[-a-z\\d_]*)?$",
       "i"
     ); // validate fragment locator
     return !!urlPattern.test(urlString);
@@ -421,8 +421,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               text: {
                 content:
-                  "3. What is the most technically challenging project that you have worked on? " +
-                  "Be sure to dive deep into the technical aspects of the project.",
+                  "3. What is your favorite Pokemon?",
               },
               annotations: {
                 bold: true,
