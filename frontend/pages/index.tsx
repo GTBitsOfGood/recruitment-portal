@@ -59,7 +59,7 @@ const Home: NextPage = () => {
           </a>
         </div>
         <br />
-        Note: You may only apply to one of these positions!
+        Note: You may only apply to one engineering position per semester - applying to multiple will result in a rejection!
         <a className={styles.netlifyLogo} href="https://www.netlify.com/" />
       </main>
     </div>
