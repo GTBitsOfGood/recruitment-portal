@@ -25,6 +25,12 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Local Development
+
+If you utilize the `.env` file with our testing databases, any changes you make to the notion database should appear at these links:
+- Developer DB: https://www.notion.so/gtbitsofgood/b6de5890dcf24394842efd6562bb0e46
+- Bootcamper DB: https://www.notion.so/gtbitsofgood/22585cd4051b46c19e22d86a9d2f69af
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
