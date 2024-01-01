@@ -57,7 +57,7 @@ const Dev: NextPage = () => {
             This is the application to be a Bits of Good <b>
               Dev Bootcamper
             </b>{" "}
-            for Fall 2023!
+            for Spring 2024!
             <br />
             <a
               target="_blank"
@@ -68,15 +68,26 @@ const Dev: NextPage = () => {
             </a>{" "}
             to learn more about <i>booties</i> at Bits of Good &#128187;
             <h3>Important dates</h3>
-            General Deadline: 11:59 PM, August 29, 2023
+            General Deadline: 11:59 PM, January 17, 2024
             <br />
-            Latest Decision Date: September 2, 2023
+            Latest Decision Date: January 21, 2024
+            <br />
+            <br />
+            We <b>review applications on a rolling basis</b>, so please apply as soon
+            as possible. You <b>may</b> be invited to interview with us once you 
+            submit your application. Please refrain from mailing us regarding the
+            status of your application prior to the latest decision date. We try
+            our best to interview as many candidates as possible, however due to
+            the sheer volume of applications and limited resources at our
+            disposal we may not be able to offer an interview to everyone that
+            applies. Not getting an interview <b>does not mean</b> your
+            application has been rejected.
             <br />
             <br />
             Note: If you are accepted, we do have a mandatory Launch Party at
             the beginning of each semester. This is a great opportunity to meet
             other club members, get to know your project team and network with
-            nonprofits! The date is <b>September 5, 2023 from 6:30-9PM</b>.
+            nonprofits! The date is <b>January 23, 2024 from 6:30-9PM</b>.
             <br />
             <br />
             Please make sure to add{" "}

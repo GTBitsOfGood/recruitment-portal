@@ -40,7 +40,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h2 className={styles.title}>
           Welcome to the <a href="https://bitsofgood.org">Bits of Good</a>
-          &nbsp;Fall &apos;23 Eng Apps
+          &nbsp;Spring &apos;24 Engingeering Apps
         </h2>
         <p className={styles.code}>I want to be a...</p>
         <div className={styles.grid}>

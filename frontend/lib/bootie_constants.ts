@@ -84,7 +84,7 @@ const section0: Array<any> = [
   {
     key: 14,
     id: "credits",
-    label: "How many credit Hours are you expecting to take this Fall?",
+    label: "How many credit Hours are you expecting to take this Spring?",
     required: true,
   },
   {
@@ -115,7 +115,7 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Spring 2023 or earlier)? If so, what position " +
+      "this semester (Spring 2024 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
   },
@@ -181,7 +181,7 @@ const section2: Array<any> = [
     label:
       "We would like to see your html/css experience through " +
       " a simple take-home assessment: " +
-      "https://github.com/GTBitsOfGood/fall23-dev-bootcamp-assessment. " +
+      "https://github.com/GTBitsOfGood/spring24-dev-bootcamp-assessment. " +
       "Please include a link to your public repository after " +
       "you have completed the assessment.",
     required: true,

@@ -133,7 +133,7 @@ const section0: Array<any> = [
     id: "previouslyApplied",
     label:
       "Were you previously a member of Bits of Good prior to " +
-      "this semester (Spring 2023 or earlier)? If so, what position " +
+      "this semester (Spring 2024 or earlier)? If so, what position " +
       "and which semester(s)?",
     required: false,
   },
@@ -199,7 +199,7 @@ const section2: Array<any> = [
     id: "psq4",
     label:
       "We would like to see your practical ability through a simple take-home " +
-      "assessment: https://github.com/GTBitsOfGood/fall23-dev-assessment. Please " +
+      "assessment: https://github.com/GTBitsOfGood/spring24-dev-assessment. Please " +
       "include a link to your public repository after you have completed the assessment.",
     required: true,
   },
